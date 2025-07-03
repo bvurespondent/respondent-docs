@@ -1,0 +1,32 @@
+---
+title: "NDAs"
+description: "Suggest Edits"
+---
+
+# How do NDAs work on Respondent?
+
+When an NDA is added to a project the participant must first view the document and express their agreement or disagreements to the document before submitting their application to a study.
+
+* Participants who do not agree to an NDA are still delivered as available screener responses, but ineligible for a "qualified" status. Read more about [project statuses](/docs/project-statuses).
+
+![](/images/docs/f86ea91-NDAs.png)
+
+## Self hosted NDAs
+
+Self hosted NDAs allow for a URL to be passed to Respondent via the `ndaLink` field in project creation (POST: /v1/projects)
+
+* This field is commonly made available for end user researchers to provide a link to their preferred document handler
+* It can also be used to pass an internal link if you provide your own document hosting functionality, once the researcher uploads an NDA file to you, the corresponding public link can be made available via `ndaLink`.
+
+## Respondent hosted NDAs
+
+Coming soon!
+
+***
+
+* [Table of Contents](#)
+
+* * [How do NDAs work on Respondent?](#how-do-ndas-work-on-respondent)
+
+    * [Self hosted NDAs](#self-hosted-ndas)
+    * [Respondent hosted NDAs](#respondent-hosted-ndas)

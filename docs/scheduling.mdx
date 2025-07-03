@@ -1,0 +1,68 @@
+---
+title: "Scheduling"
+description: "How to schedule for moderated projects"
+---
+
+[Suggest Edits](/edit/scheduling)
+
+# When and how to use scheduling
+
+Scheduling endpoints are applicable for the following methodologies: `oneOnOne`, `focusGroup`, `inRespondentHome`, `inRespondentOffice`.
+
+## Where to start
+
+Scheduling begins with [project creation](/reference/projectscontroller_create). When one of the above methodologies is select for a project, the `bookingURL` field in the `externalResearcher` object is required to schedule with participants. The link provided should lead participants to a page where they can select a time to participate in the study. The booking page should not require a participant to enter email or phone number and should instead rely on the data passed in the redirect URL parameters to associate the schedule with the appropriate participant: `?respondent_profile_id={{%PROFILE_ID%}}&respondent_project_id={{%PROJECT_ID%}}&respondent_screener_response_id={{%SCREENER_RESPONSE_ID%}}`
+
+<Frame caption="Participants will see the link as the &#x22;Book a Time&#x22; button in their dashboard.">
+  <img src="/images/docs/c9fca3e-Screenshot_2024-02-01_at_1.50.08_PM.png" />
+</Frame>
+
+## Inviting participants
+
+Before a participant has the opportunity to book time they must first be invited to the project via: `/v1/projects/{projectId}/screener-responses/{screenerResponseId}/invite` [\[link\]](/reference/screenerresponsescontroller_invite-1). When sending the invite you have the option to send a zoom or other meeting attendance link using the `remoteCommunicationDetails` field. If the meeting link isn't available at invite, it can also be updated during scheduling.
+
+## Scheduling participants
+
+Once a participant has been invited, they will be able to follow the "Book a Time" button to scheduled a time on your platform. Once the participant has confirmed a time the schedule endpoint,`/v1/projects/{projectId}/screener-responses/{screenerResponseId}/schedule` [\[link\]](/reference/screenerresponsescontroller_schedule-1), should be utilized to send Respondent the booking information to keep the participant informed.
+
+<Frame caption="Participants will see the ability to Reschedule, a Scheduled status, and the time of meeting">
+  <img src="/images/docs/733b7fe-Screenshot_2024-02-01_at_1.59.47_PM.png" />
+</Frame>
+
+<Frame caption="Clicking on a project name will review projects details including the meeting link.">
+  <img src="/images/docs/fc1ccde-Screenshot_2024-02-01_at_2.23.52_PM.png" />
+</Frame>
+
+## Rescheduling
+
+Rescheduling is acceptable up to 4 hours before a scheduled event. After that time if a participant cannot meet a new time requirement and needs to cancel, they will be considered "completed/attended" and incentive will be extracted for payment.
+
+Rescheduling prior to the 4 hour window can be accomplished via: `[/v1/projects/{projectId}/screener-responses/{screenerResponseId}/cancel-booking-reinvite]` [\[link\]](/reference/screenerresponsescontroller_cancelbookingreinvite)
+
+This simple moves the participant back to their original "invited status.
+
+<Frame caption="Participants will see the link as the &#x22;Book a Time&#x22; button in their dashboard.">
+  <img src="/images/docs/c9fca3e-Screenshot_2024-02-01_at_1.50.08_PM.png" />
+</Frame>
+
+## Cancelling
+
+Cancelling is acceptable up to 4 hours before a scheduled event. After that time a participant will be considered "completed/attended" and incentive will be extracted for payment.
+
+Cancelling prior to the 4 hours window can be accomplished via: `[/v1/projects/{projectId}/screener-responses/{screenerResponseId}/cancel-booking]`[\[link\]](/reference/screenerresponsescontroller_cancelbooking)
+
+<Frame caption="Participants will see a &#x22;Cancelled&#x22; status.">
+  <img src="/images/docs/463f159-Screenshot_2024-02-01_at_2.32.25_PM.png" />
+</Frame>
+
+***
+
+* [Table of Contents](#)
+
+* * [When and how to use scheduling](#when-and-how-to-use-scheduling)
+
+    * [Where to start](#where-to-start)
+    * [Inviting participants](#inviting-participants)
+    * [Scheduling participants](#scheduling-participants)
+    * [Rescheduling](#rescheduling)
+    * [Cancelling](#cancelling)

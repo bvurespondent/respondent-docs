@@ -1,0 +1,29 @@
+---
+title: "Overview"
+description: "Respondent’s API gives your development team the tools to deliver seamless, high-quality participant recruitment—right from your own platform. By integrating our API, you can give your researchers access to Respondent’s deeply profiled, highly qualified participant pool without ever leaving your environment."
+---
+
+With our REST API, you can: • Create projects and screeners programmatically • Retrieve participant profiles and status in real-time • Send messages to participants throughout the study lifecycle • Monitor participant progress via webhooks for status changes
+
+Your developers can integrate these endpoints to build custom UI for project creation and participant management and embed Respondent workflows directly into your platform. Whether you’re building new tools or enhancing existing ones, the Respondent API enables you to streamline study setup and deliver exceptional participant experiences.
+
+To begin, you’ll need a Client ID and Client Secret. Visit our [Quickstart Guide](https://dash.readme.com/project/respondentapi/v1.0/docs/quickstart) to learn the steps to receiving credentials and start integrating.
+
+Example:
+
+<CodeGroup>
+  ```json json
+  curl --location 'https://api-staging.respondent.io/v1/skills?query=comp' \
+  --header 'x-api-key: MY_ID' \
+  --header 'x-api-secret: MY_SECRET'
+  ```
+</CodeGroup>
+
+## Rate limiting
+
+To ensure stability and fair usage across clients, our API enforces the following rate limits:
+
+| Environment | Requests per Second | Burst Capacity | Daily Quota            |
+| ----------- | ------------------- | -------------- | ---------------------- |
+| Production  | 250 RPS             | 500 requests   | 1,000,000 requests/day |
+| Staging     | 50 RPS              | 100 requests   | 200,000 requests/day   |

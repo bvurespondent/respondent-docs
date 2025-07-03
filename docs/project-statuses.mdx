@@ -1,0 +1,36 @@
+---
+title: "Project statuses"
+description: "Suggest Edits"
+---
+
+# Managing project status
+
+In each project status PATCH there are 2 key fields that dictate what a project is doing. Each PATCH endpoint does something slightly different with the fields.
+
+projectStatus: `DRAFT`, `PAID`, `ARCHIVED`, `CLOSED`
+
+projectRecruitingStatus: `RECRUITING`, `RECRUITED`, `PAUSED`
+
+## PATCH: /v1/projects/\{projectId}/publish
+
+projectStatus = `PAID` projectRecruitingStatus = `RECRUITING` publishedAt = now expireAt = 1 month from now (project must currently have projectStatus `DRAFT`, project must contain 2 screener questions)
+
+## PATCH:/v1/projects/\{projectId}/pause
+
+projectStatus = `PAID` projectRecruitingStatus = `PAUSED` (project must currently have projectStatus `PAID` in order to pause or unpause)
+
+## PATCH:/v1/projects/\{projectId}/close
+
+projectStatus = `CLOSED` projectRecruitingStatus = `RECRUITED` closedDetails.closed = `TRUE` closedDetails.closedMessage = message // message passed in to explain closing reason closedDetails.closedByUserId = currentUserId closedDetails.closedOnDate = now
+
+If your project has screener responses in `SCHEDULED` or `ATTENDED` status, you will receive a 400 error with the message `Project has unpaid participants and cannot be closed` when you make a request to close the project.
+
+***
+
+* [Table of Contents](#)
+
+* * [Managing project status](#managing-project-status)
+
+    * [PATCH: /v1/projects/\{projectId}/publish](#patch-v1projectsprojectidpublish)
+    * [PATCH:/v1/projects/\{projectId}/pause](#patchv1projectsprojectidpause)
+    * [PATCH:/v1/projects/\{projectId}/close](#patchv1projectsprojectidclose)

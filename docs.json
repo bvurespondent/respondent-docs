@@ -1,102 +1,211 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Create a project",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#0f72eb",
+    "light": "#0f72eb",
+    "dark": "#0f72eb"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.ico",
   "navigation": {
     "tabs": [
       {
         "tab": "Guides",
         "groups": [
           {
-            "group": "Get Started",
+            "group": "Getting started",
             "pages": [
-              "index",
-              "quickstart",
-              "development"
+              "docs/introduction",
+              "docs/quickstart",
+              "docs/staging-environment",
+              "docs/requirements-for-production-credentials"
             ]
           },
           {
-            "group": "Essentials",
+            "group": "Projects",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
+              "docs/projects-overview",
+              "docs/project-creation-json",
+              "docs/project-deep-dive",
+              "docs/ndas",
+              "docs/project-statuses",
+              "docs/targeting-audiences-effectively",
+              "docs/audience-quotas"
+            ]
+          },
+          {
+            "group": "Screeners and Responses",
+            "pages": [
+              "docs/screener-overview",
+              "docs/screener-creation",
+              "docs/skip-logic",
+              "docs/collecting-responses",
+              "docs/working-with-responses",
+              "docs/url-parameters-for-project-link",
+              "docs/scheduling",
+              "docs/multiple-payments"
+            ]
+          },
+          {
+            "group": "Messaging",
+            "pages": [
+              "docs/messaging-overview-copy",
+              "docs/creating-conversations"
+            ]
+          },
+          {
+            "group": "Webhooks",
+            "pages": [
+              "docs/webhooks"
+            ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              "docs/api-vs-researcher-platform",
+              "docs/conditional-and-dependency-reference",
+              "docs/automated-emails",
+              "docs/b2b-participant-qualification-and-filters",
+              "docs/incentive-calculator",
+              "docs/api-faq"
             ]
           }
         ]
       },
       {
-        "tab": "API Reference",
+        "tab": "API Endpoints",
         "groups": [
           {
-            "group": "API Documentation",
+            "group": "Getting started",
             "pages": [
-              "api-reference/introduction"
+              "reference/introduction-1",
+              "reference/staging-vs-production"
             ]
           },
           {
-            "group": "Endpoint Examples",
+            "group": "Project Setup",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "reference/projectscontroller_create",
+              {
+                "group": "Core Setup",
+                "pages": [
+                  "reference/projectscontroller_create"
+                ]
+              },
+              {
+                "group": "Extended Setup Actions",
+                "pages": [
+                  "reference/projectscontroller_projectaudiencesizeestimate"
+                ]
+              },
+              {
+                "group": "Project Management",
+                "pages": [
+                  "reference/projectscontroller_findall"
+                ]
+              },
+              {
+                "group": "Screener Question Management",
+                "pages": [
+                  "reference/screenerquestionscontroller_findall-1"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Screener Response Handling",
+            "pages": [
+              "reference/screenerresponsescontroller_findall-1",
+              {
+                "group": "View Responses & Profiles",
+                "pages": [
+                  "reference/screenerresponsescontroller_findall-1"
+                ]
+              },
+              {
+                "group": "Invite & Schedule Participants",
+                "pages": [
+                  "reference/screenerresponsescontroller_qualify-1"
+                ]
+              },
+              {
+                "group": "Update Participant Status",
+                "pages": [
+                  "reference/screenerresponsescontroller_markatteneded-1"
+                ]
+              },
+              {
+                "group": "Payouts",
+                "pages": [
+                  "reference/screenerresponsescontroller_payoutparticipant"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Messaging",
+            "pages": [
+              "reference/conversationscontroller_create",
+              {
+                "group": "Create Messages & Conversations",
+                "pages": [
+                  "reference/conversationscontroller_create"
+                ]
+              },
+              {
+                "group": "View Messages & Conversations",
+                "pages": [
+                  "reference/messagescontroller_findall"
+                ]
+              },
+              {
+                "group": "Manage Conversations",
+                "pages": [
+                  "reference/conversationscontroller_markasread"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Lookup and Reference Data",
+            "pages": [
+              "reference/industriescontroller_findall-1",
+              {
+                "group": "Lookup Lists",
+                "pages": [
+                  "reference/industriescontroller_findall-1"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Webhooks",
+            "pages": [
+              "reference/webhookscontroller_create",
+              {
+                "group": "Webhook Configuration",
+                "pages": [
+                  "reference/webhookscontroller_create"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Team Tools",
+            "pages": [
+              "reference/teamrespondentscontroller_findall",
+              {
+                "group": "Team Features",
+                "pages": [
+                  "reference/teamrespondentscontroller_findall"
+                ]
+              }
             ]
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
   },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
-  },
-  "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
-      }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
-    }
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
-  }
+  "logo": "/images/0bfc898-small-Logo_wordmark.png"
 }

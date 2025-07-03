@@ -1,0 +1,10 @@
+---
+title: "Trigger manual payout"
+description: "post https://api-staging.respondent.io/v1/projects/{projectId}/screener-responses/{screenerResponseId}/payouts"
+---
+
+Used to payout a participant multiple times. Must pass payoutCount to ensure the intended number of payouts occur. Will pay them the same incentive amount again based on the project. Use `GET /projects/:projectId/payouts` to get the payout counts per participant for a project.
+
+Projects Autopay(true): The first time participants are paid automatically when they are marked as attended.
+
+Projects Autopay(false): The first time payment should be done by using the `POST /projects/:projectId/screener-responses/:screenerResponseId/payouts` endpoint.

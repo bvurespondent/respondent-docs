@@ -1,0 +1,174 @@
+---
+title: "Overview"
+description: "Webhooks are available to send updates to a specified url for your organization when changes take place."
+---
+
+[Suggest Edits](/edit/webhooks)
+
+<Info />
+
+### Available Webhook Event Types
+
+| Webhook Event                | Description                                                                                                                                                                                                                     |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PROJECTS.UPDATED`           | When the `recruitingStatus` of the project changes.                                                                                                                                                                             |
+| `SCREENER_RESPONSES.CREATED` | When a new screener response has been submitted by a participant.                                                                                                                                                               |
+| `SCREENER_RESPONSES.UPDATED` | - When a screener response has been updated by a participant. Non-researcher actions. Including status change to `PAID` or `CANCELLED`. - When a screener is rejected and no longer visible, or approved and made visible again |
+
+### Webhook Body Examples
+
+#### Project updated - started recruiting for first time
+
+```
+{
+  event: 'PROJECTS.UPDATED',
+  uuid: '015d7dbb-3f6b-4446-a1d3-0336ac91b320',
+  created: '2024-08-28T22:20:04.248Z',
+  payload: {
+    resource: {
+      id: '66cfaf354b3f22e42ac79a92',
+      type: 'projects',
+      updatedFields: [
+        {
+          name: 'recruitingStatus',
+          newValue: 'RECRUITING',
+        },
+      ],
+    },
+  },
+}
+```
+
+#### Screener response created
+
+```
+{
+  event: 'SCREENER_RESPONSES.CREATED',
+  uuid: '015d7dbb-3f6b-4446-a1d3-0336ac91b320',
+  created: '2024-08-28T22:20:04.248Z',
+  payload: {
+    resource: {
+      id: '66cf97060888f40f25b78ab4',
+      parentId: '66cf96ce0888f40f25b78297',
+      type: 'screener-responses',
+    },
+  },
+}
+```
+
+#### Screener response status updated
+
+```
+{
+  event: 'SCREENER_RESPONSES.UPDATED',
+  uuid: '67ec23b8-4016-42cc-933d-073d141d8e76',
+  created: '2024-08-28T22:20:04.248Z',
+  payload: {
+    resource: {
+      id: '66cf97060888f40f25b78ab4',
+      parentId: '66cf96ce0888f40f25b78297',
+      type: 'screener-responses',
+      updatedFields: [
+        {
+          name: 'status',
+          oldValue: 'ATTENDED',
+          newValue: 'PAI',
+        },
+      ],
+    },
+  },
+}
+```
+
+#### Screener Response rejected (will no longer be visible in api)
+
+```
+{
+  event: 'SCREENER_RESPONSES.UPDATED',
+  uuid: '67ec23b8-4016-42cc-933d-073d141d8e76',
+  created: '2024-08-28T22:20:04.248Z',
+  payload: {
+    resource: {
+      id: '66cf97060888f40f25b78ab4',
+      parentId: '66cf96ce0888f40f25b78297',
+      type: 'screener-responses',
+      updatedFields: [
+        {
+          name: 'rejected',
+          oldValue: false,
+          newValue: true,
+        },
+      ],
+    },
+  },
+}
+```
+
+### To Setup a webhook
+
+* Create a `POST` to `/v1/webhooks` with the desired url for webhooks to be sent to.
+* ```
+  {"url": "https://my-webhooks.com"}
+  ```
+* This will return a body with the id, url, and a privateKey to be used to validate webhook responses
+  ```
+  {
+    "id": "6668c6892df38f2e720c97d6",
+    "url": "https://my-webhooks.com",
+    "privateKey": "74e811b4-a1cc-4fa7-857b-0df0fce9a5a9"
+  }
+  ```
+
+### To Validate a webhook signature
+
+<CodeGroup>
+  ```node node
+  const signatureHeader = request.headers['Respondent-Webhook-Signature'];
+  const body = request.body;
+  const algorithm = signatureHeader.substring(0, signatureHeader.indexOf('='));
+  const receivedSignature = signatureHeader.replace(algorithm + '=', '');
+  const privateKey = '<privateKey>';
+
+  const hmacBodyDigest = createHmac(algorithm, privateKey)
+      .update(JSON.stringify(body))
+      .digest('base64');
+
+  if (hmacBodyDigest === receivedSignature) {
+      // Handle webhook events
+      return HttpStatusCode.Ok;
+    } else {
+      return HttpStatusCode.Forbidden;
+    }
+  ```
+</CodeGroup>
+
+### Webhook responses and retries
+
+We do not currently expect a response to webhook events we send to you.
+
+You may respond with success, an error, or not respond at all. We have internal logging for errors, but do not retry or backoff.
+
+Even if you respond with an error, we will continue sending future events your way and do not currently disable webhooks after multiple failures.
+
+Visit our API Reference for more details:
+
+[https://developers.respondent.io/reference/webhookscontroller\_create](/reference/webhookscontroller_create)
+
+***
+
+* [Table of Contents](#)
+
+* * [Available Webhook Event Types](#available-webhook-event-types)
+
+  * [Webhook Body Examples](#webhook-body-examples)
+
+    * [Project updated - started recruiting for first time](#project-updated---started-recruiting-for-first-time)
+    * [Screener response created](#screener-response-created)
+    * [Screener response status updated](#screener-response-status-updated)
+    * [Screener Response rejected (will no longer be visible in api)](#screener-response-rejected-will-no-longer-be-visible-in-api)
+
+  * [To Setup a webhook](#to-setup-a-webhook)
+
+  * [To Validate a webhook signature](#to-validate-a-webhook-signature)
+
+  * [Webhook responses and retries](#webhook-responses-and-retries)

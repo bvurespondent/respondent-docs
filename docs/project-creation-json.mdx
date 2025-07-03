@@ -1,0 +1,135 @@
+---
+title: "Create a project"
+description: "Putting project requirements to use"
+---
+
+[Suggest Edits](/edit/project-creation-json)
+
+# Defining a Project
+
+The following fields represent the most basic necessities a researcher will need to define a project. There are many additional dependencies and conditional values that will be covered in the Conditions page linked below.
+
+| Feature name         | Filed name                       | Use case                                                                                                                                                                                                                                                                      |
+| -------------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Internal name        | `publicInternalName`             | This allows researchers to apply a project name unseen by participants - often used for internal tracking                                                                                                                                                                     |
+| Project title        | `publicTitle`                    | A project name will catch participants' attention                                                                                                                                                                                                                             |
+| Project description  | `publicDescription`              | Additional information about what will be required of the participant or why the study is being run                                                                                                                                                                           |
+| Time required        | `participantTimeRequiredMinutes` | This is the amount of time a researcher needs from a participant                                                                                                                                                                                                              |
+| Incentive            | `incentiveAmount`                | The amount of money being paid to the participant for joining the study                                                                                                                                                                                                       |
+| Type of research     | `typeOfResearch`                 | This field determines whether research is remote or in-person                                                                                                                                                                                                                 |
+| Research methodology | `targetResearchMethodology`      | This allows the researcher to select the methodology of their study - this will enable different features based on the selection. [Learn more about research method types ↗️.](https://help.respondent.io/en/articles/5489302-research-method-and-types-of-research-projects) |
+| Target audience      | `targetMarketType`               | Allows targeting of business professionals (B2B) or consumers (B2C)                                                                                                                                                                                                           |
+| NDA                  | `ndaLink`                        | Allows researcher to link to a document handler that will be presented to the participant during application to a study                                                                                                                                                       |
+| Researcher           | `externalResearcher`             | Allows Respondent to understand who is communicating with a participant                                                                                                                                                                                                       |
+
+We also collect an `externalResearcher` object to aid in features like messaging, past participation tracking, and more.
+
+| Field name       | Use case                                     | Required |
+| ---------------- | -------------------------------------------- | -------- |
+| `researcherId`   | Participant and researcher reference         | Y        |
+| `researcherName` | Show researcher name to participant in chat  | N        |
+| `teamId`         | Supplemental information for better matching | N        |
+| `companyName`    | Supplemental information for better matching | N        |
+| `companyId`      | Supplemental information for better matching | N        |
+| `bookingUrl`     | Direct a participant to your booking page    | N        |
+
+# Targeting an Audience
+
+Researchers want to target a specific group of people to eventually take their screener. This first layer of targeting material is what we use to begin our matching process of bringing highly qualified participants to research projects.
+
+| Feature name           | Field name                      | Required (Y/N) |
+| ---------------------- | ------------------------------- | -------------- |
+| Number of participants | `targetNumberOfParticipants`    | Y              |
+| Target audience        | `targetMarketType`              | Y              |
+| Location               | `targetCountry`, `targetCities` | Y              |
+| Household income       | `targetHouseholdIncome`         | N              |
+| Gender                 | `targetGenders`                 | N              |
+| Education              | `targetEducation`               | N              |
+| Ethnicity              | `targetEthnicities`             | N              |
+| Age range              | `targetAgeGroups`               | N              |
+
+Conditionally available fields are not shown here. Read through Conditions, linked below, for more information.
+
+# Project creation
+
+POST: /v1/projects
+
+B2B and B2C projects differ in requirements and have different configurations. See Conditionals page linked below.
+
+<CodeGroup>
+  ```json B2B Project
+  {
+    "publicTitle": "Seeking business professionals!",
+    "publicInternalName": "B2B Project Example",
+    "publicDescription": "We're looking for skilled business professions in a particular industry.",
+    "typeOfResearch": "remote",
+    "targetResearchMethodology": "oneOnOne",
+    "participantTimeRequiredMinutes": 30,
+    "incentiveAmount": 80,
+    "targetNumberOfParticipants": 5,
+    "targetMarketType": "b2b",
+    "targetProfessionalIndustries": [
+      "INDUSTRY_ID_1",
+      "INDUSTRY_ID_2"
+    ],
+    "targetJobTitles": [
+      "JOB_TITLE_ID_1",
+      "JOB_TITLE_ID_1"
+    ],
+    "targetAudienceSkills": [
+      "SKILL_ID_1",
+      "SKILL_ID_2",
+      "SKILL_ID_3"
+    ],
+     "targetCountry": "all",
+     "externalResearcher": {
+      "researcherId": "PARTNER_SUPPLIED_ID",
+      "researcherName": "Jane Doe",
+      "bookingUrl": "https://bookingurl.com"
+    }
+  }
+  ```
+
+  ```json B2C Project
+  {
+    "publicTitle": "Seeking savvy consumers!",
+    "publicInternalName": "B2C Project Example",
+    "publicDescription": "We're seeking people who one this product and want to share their opinions.",
+    "typeOfResearch": "remote",
+    "targetResearchMethodology": "oneOnOne",
+    "participantTimeRequiredMinutes": 30,
+    "incentiveAmount": 60,
+    "targetNumberOfParticipants": 5,
+    "targetMarketType": "b2c",
+    "targetProjectTopics": [
+      "TOPIC_ID_1",
+      "TOPIC_ID_2"
+    ],
+     "targetCountry": "all",
+     "externalResearcher": {
+      "researcherId": "PARTNER_SUPPLIED_ID",
+      "researcherName": "Jane Doe",
+      "bookingUrl": "https://bookingurl.com"
+    }
+  }
+  ```
+</CodeGroup>
+
+Once you are able to create projects successfully you should be able to view the projects by logging into Respondent’s [staging](https://website.staging.respondent.io/login) dashboard with your credentials:
+
+![](/images/docs/a3c8e39-Screenshot_2023-09-19_at_8.06.02_PM.png)
+
+***
+
+What’s Next
+
+* [Project deep dive](/docs/project-deep-dive)
+* [Conditionals](/docs/conditional-and-dependency-reference)
+* [Screener overview](/docs/screener-overview)
+* [/v1/projects](/reference/projectscontroller_create)
+
+* [Table of Contents](#)
+
+* * [Defining a Project](#defining-a-project)
+  * [Targeting an Audience](#targeting-an-audience)
+  * [Project creation](#project-creation)

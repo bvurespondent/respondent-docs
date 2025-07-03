@@ -1,0 +1,83 @@
+---
+title: "Targeting audiences effectively"
+description: "Suggest Edits"
+---
+
+## Determining how many participants to target
+
+`targetNumberOfParticipants` is used to select how many participants a research intends to conduct research with. Respondent will always attempt to deliver 3X `targetNumberOfParticipants`with qualified participants but will not prevent more participant from applying to a project. We also do not restrict more participants being invited or paid in projects incase a researchers needs grow during the course of research.
+
+## Audience features by targetMarketType
+
+When creating projects you will be able to use the following audience features. As noted in the table different audience features are used between B2C and B2B projects.
+
+| Feature                                                   | B2C | B2B | Required         |
+| --------------------------------------------------------- | --- | --- | ---------------- |
+| targetCountries                                           | ✅   | ✅   |                  |
+| targetCities (used with countries only)                   | ✅   | ✅   |                  |
+| targetLocationRespondentInPerson (in person project only) | ✅   | ✅   |                  |
+| targetGenders                                             | ✅   | ✅   |                  |
+| targetAgeGroups                                           | ✅   | ✅   |                  |
+| targetEthnicities                                         | ✅   | ✅   |                  |
+| targetEducation                                           | ✅   | ✅   |                  |
+| targetHouseholdIncome                                     | ✅   | ✅   |                  |
+| filterPastParticipation                                   | ✅   | ✅   |                  |
+| targetProjectTopics                                       | ✅   |     | Required for B2C |
+| targetProfessionalIndustries                              |     | ✅   | Required for B2B |
+| targetCompanySize                                         |     | ✅   |                  |
+| seniority                                                 |     | ✅   |                  |
+| targetJobFunctions                                        |     | ✅   |                  |
+| targetJobTitles                                           |     | ✅   |                  |
+| targetAudienceSkills                                      |     | ✅   |                  |
+
+## Audience feature by type (filters vs signals)
+
+Audience features have 2 different implementations to ensure projects can be filled appropriately. Some features are used as filters while others are used as signals.
+
+**Filters**
+
+Filter type audience features restrict which participant have access to apply to projects. If a filter type audience feature is applied to a project participants will only be able to apply to the project if their profile matches the selected feature.
+
+**Signals**
+
+Signal type audience features influence Respondent's matching algorithm and determine which participants are contacted to fill the project via a fuzzy match, but does not restrict participants from applying if their profile is not an exact match. This will also allow more participants to organically apply to a project through their participant dashboards if they are an exact match for the filter type audience features used in a project.
+
+<Info />
+
+| Feature                                                   | Filter | Signal |
+| --------------------------------------------------------- | ------ | ------ |
+| targetCountries                                           | ✅      |        |
+| targetCities (used with countries only)                   | ✅      |        |
+| targetLocationRespondentInPerson (in person project only) | ✅      |        |
+| targetGenders                                             | ✅      |        |
+| targetAgeGroups                                           | ✅      |        |
+| targetEthnicities                                         | ✅      |        |
+| filterPastParticipation                                   | ✅      |        |
+| targetEducation                                           | ✅      |        |
+| targetHouseholdIncome                                     |        | ✅      |
+| targetProjectTopics                                       |        | ✅      |
+| targetProfessionalIndustries                              |        | ✅      |
+| targetCompanySize                                         |        | ✅      |
+| seniority                                                 | ✅      |        |
+| targetJobFunctions                                        | ✅      |        |
+| targetJobTitles                                           |        | ✅      |
+| targetAudienceSkills                                      |        | ✅      |
+
+## Audience qualification
+
+Screener responses are qualified across the participants profile and their actual responses to screener questions to be determined qualified or not. Answering all screener questions with qualifying answers makes them qualified on a screener, but profile qualification can be achieve by matching all filter type audiences features.
+
+Respondent will treat participants that match all audience feature with preferential treatment when actively recruiting, but will qualify participants that are not direct matches for signal type audience features.
+
+**Example**
+
+If a participants qualified via the screener AND they match selected `targetAgeGroups` and `targetCountries` but not `targetHouseholdIncome`, their response will be considered qualified by default. Partners or research can chose to disqualify these responses to narrow the number of participants and keep recruiting open.
+
+***
+
+* [Table of Contents](#)
+
+* * [Determining how many participants to target](#determining-how-many-participants-to-target)
+  * [Audience features by targetMarketType](#audience-features-by-targetmarkettype)
+  * [Audience feature by type (filters vs signals)](#audience-feature-by-type-filters-vs-signals)
+  * [Audience qualification](#audience-qualification)

@@ -1,0 +1,94 @@
+---
+title: "Multiple payments"
+description: "Suggest Edits"
+---
+
+We provide 2 `screener-responses` endpoints to allow invited participants to be paid the projects incentive amount up to 5 times. For instances where the second, third, forth, and fifth payments may need to be higher than the initial incentive, there is a `tips` field that allows for a payment to a participant to exceed the incentive defined in the project.
+
+<Info />
+
+If researchers are running a multi-stage project and want to advertise the total possible incentive in a research project, this should be included in the project title or description as a callout for "up to $XX incentive". To maintain trust with participants, the incentive defined in the project is the lowest amount a participant will get paid if they complete the project.
+
+If researchers plan to have variable incentives based on quality or time of a study that they will determine after interacting with a participant, the incentive set at the project should be the lowest possible payment.
+
+## How to use multiple payments
+
+It is first important to note that the first payment to a participant will always take place automatically after they are marked as Attended/Complete. Beyond that you can utilize the following endpoints to complete subsequent payments.
+
+* /v1/projects/\{projectId}/screener-responses/payouts
+* /v1/projects/\{projectId}/screener-responses/\{screenerResponseId}/payouts
+
+### /v1/projects/\{projectId}/screener-responses/payouts
+
+* To begin a followup payment, you must first call the payouts GET with the desired project ID
+* You should receive a response like this:
+
+<CodeGroup>
+  ```Text After 1st payment
+  [
+    {
+      "userId": "string",
+      "profileId": "string",
+      "screenerResponseId": "string",
+      "numberOfPayouts": 1,
+      "payouts": [
+        {
+          "incentive": 50,
+          "tip": 0,
+          "totalIncentive": 0,
+          "createdAt": "string"
+        }
+      ]
+    }
+  ]
+  ```
+
+  ```Text After 2nd payment
+  [
+    {
+      "userId": "string",
+      "profileId": "string",
+      "screenerResponseId": "string",
+      "numberOfPayouts": 2,
+      "payouts": [
+        {
+          "incentive": 50,
+          "tip": 0,
+          "totalIncentive": 0,
+          "createdAt": "string"
+        }
+        {
+          "incentive": 50,
+          "tip": 10,
+          "totalIncentive": 60,
+          "createdAt": "string"
+        }
+      ]
+    }
+  ]
+  ```
+</CodeGroup>
+
+### /v1/projects/\{projectId}/screener-responses/\{screenerResponseId}/payouts
+
+* After confirming the current number of payments for a profile ID, you can POST the next payment
+
+<CodeGroup>
+  ```Text 3rd payment
+  {
+    "payoutCount": 3,
+    "tip": 20
+  }
+  ```
+</CodeGroup>
+
+<Warning />
+
+***
+
+* [Table of Contents](#)
+
+* * [How to use multiple payments](#how-to-use-multiple-payments)
+
+    * [/v1/projects/\{projectId}/screener-responses/payouts](#v1projectsprojectidscreener-responsespayouts)
+    * [/v1/projects/\{projectId}/screener-responses/\{screenerResponseId}/payouts](#v1projectsprojectidscreener-responsesscreenerresponseidpayouts)

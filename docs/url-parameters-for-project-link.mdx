@@ -1,0 +1,24 @@
+---
+title: "URL Parameters for Project Link"
+description: "Suggest Edits"
+---
+
+When a participant is invited and clicks through on the scheduling or project link that you provide, Respondent will append multiple URL parameters to that link so that you can associate the participant arriving to your project or scheduling tool with the participant that you invited without having to request their email address or other PII. As a reminder, requesting PII of participants sourced through the Respondent API is in violation of our terms of service.
+
+We recommend that you extract all parameters as they are used in different API endpoints.
+
+Those parameters include:
+
+* `respondent_profile_id` -- set to the `profileId` provided in the [GET Screener Response](/reference/screenerresponsescontroller_findall-1) response and used in the [GET Profiles](/reference/profilescontroller_findone-1) endpoint call and other endpoints that require profileId
+* `respondent_user_id` -- set to the `userId` provided in the [GET Screener Response](/reference/screenerresponsescontroller_findall-1) response and used in the Messaging API endpoints if needed
+* `respondent_project_id` -- set to the `id` provided in the POST Projects response and used throughout the API to update and status the project, get and status screener responses, and in multiple other endpoints
+* `respondent_screener_response_id` -- set to the `id` provided in the [GET Screener Response](/reference/screenerresponsescontroller_findall-1) endpoints and used throughout the API to get and status screener responses
+
+In some cases, we will also append duplicate parameters `participant_id` and `project_id`. These are equivalent to `respondent_user_id` and `respondent_project_id` respectively but may not always be present in the link when the participant arrives at your project or scheduling tool.
+
+If you have added your own URL parameters into the project or scheduling link, we will simply append the above parameters to the end of that URL.
+
+Examples:
+
+* Project link: [https://www.researchplatform.com/123456](https://www.researchplatform.com/123456)
+* URL when participant arrives at your project: [https://www.researchplatform.com/123456?respondent\_profile\_id=123456789abcdefghij\&respondent\_project\_id=987654321jihgfedcba\&respondent\_screener\_response\_id=abcdefghij123456789\&respondent\_user\_id=jihgfedcba987654321](https://www.researchplatform.com/123456?respondent_profile_id=123456789abcdefghij\&respondent_project_id=987654321jihgfedcba\&respondent_screener_response_id=abcdefghij123456789\&respondent_user_id=jihgfedcba987654321)

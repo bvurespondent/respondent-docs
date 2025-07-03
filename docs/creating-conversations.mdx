@@ -1,0 +1,63 @@
+---
+title: "Creating conversations"
+description: "Putting together the pieces of a conversation"
+---
+
+[Suggest Edits](/edit/creating-conversations)
+
+# Create the conversation
+
+POST: /v1/messaging/conversations
+
+A conversation can be created with 1 or more participants IDs. In most cases messages are used for 1:1 conversations, but a group chat can be facilitated by adding multiple participant IDs
+
+<CodeGroup>
+  ```json Create conversation
+  {
+    "participantUserIds": [
+      "PARTICIPANT_ID_1",
+      "PARTICIPANT_ID_2"
+    ],
+    "projectId": "PROJECT_ID",
+    "externalResearcherId": "RESEARCHER_ID"
+  }
+  ```
+</CodeGroup>
+
+# Add messages
+
+POST: /v1/messaging/messages
+
+A conversation ID is returned in the response and is required to add a new message to the conversation. Messages will go to all participants in a conversation. Responses from participants will be visible to all participants in the conversation.
+
+<CodeGroup>
+  ```json Create message
+  {
+    "conversationUid": "CONVERSATION_ID",
+    "body": "Hi there!"
+  }
+  ```
+</CodeGroup>
+
+# Adding new participants
+
+POST: /v1/messaging/conversations/\{uid}/participants/\{participantUserId}
+
+As noted above, additional participants can be added to a conversation to facilitate a group chat environment. Responses from participants will be visible to all participants in the conversation.
+
+<CodeGroup>
+  ```json json
+  {
+    "uid": "CONVERSATION_ID",
+    "participantUserId": "PARTICIPANT_ID"
+  }
+  ```
+</CodeGroup>
+
+***
+
+* [Table of Contents](#)
+
+* * [Create the conversation](#create-the-conversation)
+  * [Add messages](#add-messages)
+  * [Adding new participants](#adding-new-participants)

@@ -1,0 +1,29 @@
+---
+title: "API FAQ"
+description: "Suggest Edits"
+---
+
+1. ### How do I test the respondent flow in staging without recruiting real participants?
+
+   You create a participant profile in staging via our [profile creation endpoint](/reference/profilescontroller_create). You can then invite that profile by following these steps:
+
+   1. Log into the staging participant profile in one browser tab.
+   2. In another tab (recommend opening in incognito), log into the researcher side.
+   3. Open a published project and look for the **Share** button in the top-right corner.
+   4. Copy the project link and switch back to the staging participant profile tab.
+   5. Paste the link into the search bar of the staging participant profile. The staging participant should then be able to access the screener.
+
+2. ### What is an externalResearcherId?
+
+   An externalResearcherId is a custom identifier that the API partner assigns to researchers when creating projects via our API.
+
+3. ### What are some tips and tricks to maximise your integration?
+
+   * `autopay` is set to `true`. If set to false, it will require you to manually login onto our DIY platform to process payment.
+   * Use the [Retrieve Audience Size Estimate](/reference/projectscontroller_projectaudiencesizeestimate) endpoint to test feasibility — it can be called multiple times as you adjust filters and signals.
+   * Use the [Qualify Participant](/reference/screenerresponsescontroller_qualify-1) endpoint: For qualifying or disqualifying participants based on their screener responses—any disqualified participant will automatically be backfilled.
+   * Use the [Mark As Rejected ](/reference/screenerresponsescontroller_reject)endpoint: For when the participant response to the study does not meet researcher’s criteria.
+   * Use the [Report Participant](/reference/screenerresponsescontroller_report-1) endpoint: For flagging participants for inappropriate behavior. Reported participants won’t appear in future projects.
+   * Enable messaging with participants through our [messaging flow](/reference/conversationscontroller_create) to boost show and task completion rates.
+   * Enable the past participant database feature to unlock the ability to filter out participants who’ve taken part in previous studies, or to selectively re-invite high-quality (favorite) participants.
+   * When a project reaches 3x the target number of participants, it is automatically paused. To continue recruitment, simply unpause the project.

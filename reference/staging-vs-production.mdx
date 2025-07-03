@@ -1,0 +1,25 @@
+---
+title: "Staging vs production"
+description: "Respondent provides both Staging and Production environments to support safe development and reliable deployment of your API integration."
+---
+
+## Staging
+
+The Staging environment is free to use and fully functional, allowing developers to build and test integrations in a risk-free environment. To learn more, see: [Staging Environment](/docs/staging-environment)
+
+* **Base URL:** [https://api-staging.respondent.io](https://api-staging.respondent.io)
+
+## Production
+
+Once your integration is ready, switch to the Production environment. To request access, see: [Requirements for Production Credentials](/docs/requirements-for-production-credentials)
+
+* **Base URL**: [https://api.respondent.io](https://api.respondent.io)
+
+<Warning>
+  When migrating your integration, please note the following:
+
+  * **Lookup ID Differences:** Lookup IDs for industries, skills, topics and jobTitles are different between staging and production. You will need to update these IDs when moving to production
+  * **Auto-pause of Projects:** All newly created production projects will be paused by default. You can request [\[email protected\]](/cdn-cgi/l/email-protection#8dfdecfff9e3e8fffef8fdfde2fff9cdffe8fefde2e3e9e8e3f9a3e4e2) to have this removed from your integration once ready
+  * **Internal Testing in Production:** You can test your project by inviting internal participants via the Share link. These are accessible in the Respondent platform by clicking into the project and selecting the "Share" dropdown (top right). Participants must have a valid Respondent account and match the project's demographic filters
+  * **Webhook Setup:** Webhooks configured in staging do not carry over to production
+</Warning>

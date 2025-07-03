@@ -1,0 +1,42 @@
+---
+title: "Overview"
+description: "Using the API and the Researcher Platform? This page is for you."
+---
+
+[Suggest Edits](/edit/api-vs-researcher-platform)
+
+# Overview
+
+Our API is built with an end to end solution in mind. It is designed to manage recruiting projects from creation to participant payment. With that in mind we've found some use cases where partners still elect to take some actions via API and others through our Researcher Platform UI. While the goal of this API is to provide very similar capabilities to our Researcher Platform UI, there are some differences in behaviors that limit what actions can happen across API and our platform UI. These limitations are largely dictated by the methodology type given the different functions each has.
+
+## Moderated projects
+
+Projects where methodology = `oneOnOne`, `focusGroup`, `inRespondentHome`, or `inRespondentOffice` are considered moderated projects and require scheduling to interact with a participant. These project types have the most restrictive in their interoperability between API and Researcher Platform:
+
+* Moderated projects drafted or published via public API **cannot be edited** on the Researcher Platform.
+  * The API required a bookingURL that is not compatible with the native booking system and instead requires API users to supply their own means of [scheduling](/docs/scheduling).
+* Moderated projects drafted or published via public API **will not have access to scheduling** on the Researcher Platform.
+  * API create projects require their own scheduling tool, read more [here](/docs/scheduling).
+* Moderated projects drafted or published via public API **cannot invite or otherwise status participants** on the Researcher Platform.
+  * Since our Researcher Platform is depended on the native scheduling functionality at this time, it will override API designated `bookingURLs`.
+
+## Unmoderated projects
+
+Projects where methodology = `unmoderatedStudy`, `survey`, or `diaryStudy` are considered moderated projects and have fewer dependencies across API and the Researcher Platform.
+
+* Unmoderated projects drafted or published via public API **can be edited** on the Researcher Platform.
+* Unmoderated projects drafted or published via public API **invite and otherwise status participants** on the Researcher Platform.
+
+## All methodologies
+
+While we recommend using `/v1/projects/{projectId}/copy` when needing to copy projects, it is technically possible to copy any API created projects on the Researcher Platform, they do however remain "API" projects with an `externalResearcher` object.
+
+***
+
+* [Table of Contents](#)
+
+* * [Overview](#overview)
+
+    * [Moderated projects](#moderated-projects)
+    * [Unmoderated projects](#unmoderated-projects)
+    * [All methodologies](#all-methodologies)

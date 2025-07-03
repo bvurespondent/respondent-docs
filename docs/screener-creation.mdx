@@ -1,0 +1,156 @@
+---
+title: "Creating questions"
+description: "Understanding question and logic types to configure questions"
+---
+
+[Suggest Edits](/edit/screener-creation)
+
+<Check />
+
+Screener questions can now be edited any time after a project is published. It is important to note there are some catches.
+
+* When updated screener questions after publishing, the screener is effectively replaced
+
+  * This means that if answers have already been collected, they are still qualified on the original screener
+  * Only new screener responses will be qualified based on screener updates
+
+We generally recommend using this only as a fallback if there was an error in screener setup or if no screener responses have been submitted. If you choose to accept edits after responses have been collected, you can use the `createdAt` field in the screener response to cross reference with the screener update time to manage different qualifications.
+
+# Question types and logic
+
+The screener `questionType` can be selected from a set list of strings. Radio and checkbox answers can have additional answer logic and skip logic applied.
+
+<Info />
+
+| questionType        | Use case            | `answerValue` Schema                          | Skip logic |
+| ------------------- | ------------------- | --------------------------------------------- | ---------- |
+| `radio`             | Single select       | 1 = Qualify 2 = Disqualify                    | Yes        |
+| `checkbox`          | Multi select        | 1 = May Select 2 = Must Select 3 = Disqualify | Yes        |
+| `singleLineTextbox` | Short form text box | n/a                                           | No         |
+| `multiLineTextbox`  | Long form text box  | n/a                                           | No         |
+| `numericBox`        | Single entry number | n/a                                           | No         |
+| `sliderScale`       | Number selector     | n/a                                           | N          |
+
+# Basic screener question setup
+
+POST: /v1/projects/:projectId/screener-questions
+
+The examples below show a basic setup for each question type.
+
+* For all examples `isRequired` is set to `true` and `skipLogic` is set to `false`
+
+* All question types can be required or not
+
+* Only `radio` and `checkbox` questions can include skip logic
+
+  * These question types can also include an `other` option, but do not require it
+  * The `radio` example shows the inclusion of an `other` option while `checkbox` example shows no `other` option
+
+* Each example shows the minimum fields required, but other fields may be available.
+
+<CodeGroup>
+  ```json Radio
+  {
+    "questionType": "radio",
+    "text": "What is your favorite coastline in the United States?",
+    "answers": [
+      {
+        "text": "East Coast",
+        "answerValue": 2
+      },
+      {
+        "text": "West Coast",
+        "answerValue": 1
+      },
+      {
+        "isOther": true,
+        "text": "Other",
+        "answerValue": 2
+      }
+    ],
+    "skipLogic": false,
+    "includeOtherOption": true,
+    "isRequired": true
+  }
+  ```
+
+  ```json Checkbox
+  {
+    "questionType": "checkbox",
+    "text": "What animals would you like to spend time with?",
+    "answers": [
+      {
+        "text": "Cat",
+        "answerValue": 1
+      },
+      {
+        "text": "Dog",
+        "answerValue": 1
+      },
+      {
+        "text": "Giraffe",
+        "answerValue": 1
+      },
+      {
+        "text": "Pineapple",
+        "answerValue": 3
+      }
+    ],
+    "isRequired": true,
+    "skipLogic": false,
+    "includeOtherOption": false
+  }
+  ```
+
+  ```json SingleLineTextbox
+  {
+    "questionType": "singleLineTextbox",
+    "text": "What is your favorite color?",
+    "skipLogic": false,
+    "isRequired": true
+  }
+  ```
+
+  ```json multiLineTextbox
+  {
+    "questionType": "multiLineTextbox",
+    "text": "In your own words, tell us what your favorite hoby is.",
+    "skipLogic": false,
+    "isRequired": true
+  }
+  ```
+
+  ```json numericBox
+  {
+    "questionType": "numericBox",
+    "text": "How old are you?",
+    "skipLogic": false,
+    "isRequired": true
+  }
+  ```
+
+  ```json sliderScale
+  {
+    "questionType": "sliderScale",
+    "text": "On a scale from 1 to 10 how confident are you building an API?",
+    "isRequired": true,
+    "skipLogic": false,
+    "minValue": 1,
+    "maxValue": 10,
+    "step": 1
+  }
+  ```
+</CodeGroup>
+
+***
+
+What’s Next
+
+Take a look at the endpoints
+
+* [Applying skip logic](/docs/skip-logic)
+
+* [Table of Contents](#)
+
+* * [Question types and logic](#question-types-and-logic)
+  * [Basic screener question setup](#basic-screener-question-setup)

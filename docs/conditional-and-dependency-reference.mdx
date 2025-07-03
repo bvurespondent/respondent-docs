@@ -1,0 +1,103 @@
+---
+title: "Conditionals"
+description: "Learn what field are available based on different conditions"
+---
+
+[Suggest Edits](/edit/conditional-and-dependency-reference)
+
+## Target Market / Audience
+
+`targetMarketType` conditional
+
+Please see [Targeting audiences effectively](/docs/targeting-audiences-effectively) for a full list of optional and required fields for B2B and B2C projects.
+
+***
+
+## In person vs remote research
+
+`typeOfResearch` conditional
+
+## In Person Research
+
+| Selection | Conditionally available field                               | Details                                                                                       |
+| --------- | ----------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| inPerson  | `targetLocationRespondentInPerson` becomes a required field | This field determines where the researcher is and determines if participants are close enough |
+
+If a researcher chooses to conduct in person research they are required to supply a country, street address, city, and zip code. In the United States a state entry is also required.
+
+![](/images/docs/a5b4e5a-image.png)
+
+### Impacts on Available Methodologies: In person
+
+`targetResearchMethodology` conditional dependent of `typeOfResearch`
+
+When inPerson is selected, the following options are available for `targetResearchMethodology`
+
+* One on One
+* Focus Group
+* In Respondent Home
+* In Respondent Office
+
+## Remote research
+
+| Selection | Conditionally available field                                      | Details                                                                                   |
+| --------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| remote    | `targetCountry` is required and `targetCities` becomes an optional | This allows researcher to determine where they would like their participants to come from |
+
+If a researcher is conducting research remotely, only `targetCountry` is required. When a target country is selected, `targetCities` becomes an optional targeting parameter.
+
+![](/images/docs/c14181d-image.png)
+
+### Impacts on Available Methodologies: Remote
+
+`targetResearchMethodology` conditional dependent of `typeOfResearch`
+
+When remote is selected, the following options are available for `targetResearchMethodology`
+
+* One on One
+* Focus Group
+* Unmoderated Study
+* Survey
+* Diary Study
+
+***
+
+## Recruiting for surveys
+
+### `targetResearchMethodology` conditional
+
+| Selection        | Conditionally available field   | Details                                                                                                                                                                                     |
+| ---------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| survey           | `task`becomes an optional field | Researchers can enter a custom URL and instructions for the survey a participant will need to complete - if this is not completed now it will need to be included in the participant invite |
+| unmoderatedStudy | `task`becomes an optional field | Researchers can enter a custom URL and instructions for the task a participant will need to complete - if this is not completed now it will need to be included in the participant invite   |
+
+![](/images/docs/8f1cbb2-image.png)
+
+***
+
+### `targetCountry` conditional
+
+| Selection             | Conditionally available field           | Details                                                                          |
+| --------------------- | --------------------------------------- | -------------------------------------------------------------------------------- |
+| Any individual counts | `targetCities` becomes a required field | This field allows researcher to target a more specific location for participants |
+
+![](/images/docs/55b5c1a-image.png)
+
+***
+
+* [Table of Contents](#)
+
+* * [Target Market / Audience](#target-market--audience)
+
+  * [In person vs remote research](#in-person-vs-remote-research)
+
+  * [In Person Research](#in-person-research)
+    * [Impacts on Available Methodologies: In person](#impacts-on-available-methodologies-in-person)
+
+  * [Remote research](#remote-research)
+    * [Impacts on Available Methodologies: Remote](#impacts-on-available-methodologies-remote)
+
+  * [Recruiting for surveys](#recruiting-for-surveys)
+
+    * [`targetResearchMethodology` conditional](#targetresearchmethodology-conditional)
+    * [`targetCountry` conditional](#targetcountry-conditional)

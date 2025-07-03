@@ -1,0 +1,81 @@
+---
+title: "Staging environment"
+description: "Learn and test in staging"
+---
+
+[Suggest Edits](/edit/staging-environment)
+
+We currently use a staging environment to allow developers to set up their integration in a risk free manner. The environment is free and fully functional.
+
+Participant API developers should build their integration in staging and then switch over to the production environment when they are ready to go live.
+
+| Environment | URL                                   |
+| ----------- | ------------------------------------- |
+| Staging     | [https://api-staging.respondent.io]() |
+
+An example call to the API would look like:
+
+<CodeGroup>
+  ```json json
+  curl --location 'https://api-staging.respondent.io/v1/skills?query=comp' \
+  --header 'x-api-key: MY_ID' \
+  --header 'x-api-secret: MY_SECRET'
+  ```
+</CodeGroup>
+
+## Testing
+
+We will provide credentials to you to log in as a Researcher in Staging.
+
+To test end to end in the staging environment you will need to add a test credit card and create staging participants using the API endpoint described below.
+
+### Card information
+
+| Field                  | Value             |
+| ---------------------- | ----------------- |
+| Full name              | John Doe          |
+| Billing street address | 23 Respondent Ave |
+| Zipcode                | 12345             |
+| Card number            | 4111111111111111  |
+| Expiry date            | 09 / 2036         |
+| Security code          | 902               |
+
+### Participant creation
+
+POST: V1/Profiles
+
+You can now create participants in staging environment via our API for easy testing using the profiles POST endpoint. Below is an example payload to create a participant profile.
+
+* Participant email and work email will be auto verified
+* All other mandatory profile info is set as random data
+* You can use this [link](https://website.staging.respondent.io/respondents/v2/login) to sign in as the participants you create to view projects from the participant point of view. and update profile fields to test multiple personals.
+
+<CodeGroup>
+  ```json json
+  {
+    "email": "[email protected]",
+    "firstName": "Sarah",
+    "lastName": "Smith",
+    "password": "test1234",
+    "gender": "female",
+    "workEmail": "[email protected]"
+  }
+  ```
+</CodeGroup>
+
+***
+
+What’s Next
+
+Get to know what you can do with the API
+
+* [Projects overview](/docs/projects-overview)
+* [Screener overview](/docs/screener-overview)
+* [Messaging overview](/docs/coming-soon)
+
+* [Table of Contents](#)
+
+* * [Testing](#testing)
+
+    * [Card information](#card-information)
+    * [Participant creation](#participant-creation)

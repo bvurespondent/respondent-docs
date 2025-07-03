@@ -1,0 +1,41 @@
+---
+title: "Defining Qualified Participants"
+description: "Suggest Edits"
+---
+
+## Definition of 'Qualified' for B2B Participants
+
+When we talk about a participant being qualified, whether they are B2B or B2C, we mean:
+
+* They are 100% qualified based on their responses to screener question logic
+* They are matched on the Filter criteria outlined in our [targeting overview](/docs/targeting-audiences-effectively#audience-feature-by-type)
+* They have agreed to the NDA (if you require NDAs)
+
+Beyond these definitions, there is no hard filter for qualified participants, such as household income or company or industry unless you have set those as key qualifiers when available. Instead these other parameters are used as part of the matching sort we do when promoting projects to participants.
+
+To apply to B2B projects, participants will still need to have a verified work email, but participants can have a different industry, job title, and company size and they will still be considered qualified if all the qualification criteria above are met.
+
+<Info>
+  We have found that job titles, industries, and other company information used in targeting can be very different across different roles, companies, and countries. As a result, in order to determine whether the participant has the requisite knowledge and experience, an effective screener does a better job than simply targeting by those employment criteria.
+</Info>
+
+## How to Qualify B2B Participants
+
+Partners handle B2B participant qualification in a number of different ways:
+
+* They set expectations that the researcher needs to create a good screener that encompasses all role and functional requirements, even if they are covered by the B2B project audience criteria ([see our guide](https://blog.respondent.io/screener-survey-guide-how-to-screen-for-unmoderated-studies))
+* They use Job Function, Seniority, and key qualifiers to create hard match filters that determine qualification and either don't use job title or use it for additional signal value when we match participants
+* They do text matching on the job title within each profile to decide who to invite and who to disqualify
+* They use the matching object in the [Screener Response endpoint](/reference/screenerresponsescontroller_findall-1) response to exact match against any of the B2B targeting fields and disqualify (using the [Screener Response Qualify endpoint](/reference/screenerresponsescontroller_qualify-1)) if there is not an exact match (so that the recruiting will continue)
+  * Note that the exact match provided in the matching object is very specific in comparing the job title requested to the job title provided by the participant. For example, "Product Manager" and "Senior Product Manager" would not be a match, and "IT Director" and "Director, IT" would not be a match. *As a result, it is recommended that if you use the matching object to disqualify participants, you also provide as many relevant job titles as possible in the project setup.*
+
+<Warning>
+  If you are using the API to disqualify participants, be sure to also check that the project has not paused automatically, especially if your requested number of participants is small. Respondent will auto-pause projects when the number of qualified participants equals 3x the number of participants requested. However, we will not un-pause a project if you disqualify participants after we have already auto-paused it. In that case, you will need to unpause the project using the [Project Pause endpoint](/reference/projectscontroller_pause).
+</Warning>
+
+***
+
+* [Table of Contents](#)
+
+* * [Definition of 'Qualified' for B2B Participants](#definition-of-qualified-for-b2b-participants)
+  * [How to Qualify B2B Participants](#how-to-qualify-b2b-participants)

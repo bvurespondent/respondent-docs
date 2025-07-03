@@ -1,0 +1,49 @@
+---
+title: "Automated Researcher Emails"
+description: "Overview of transactional emails sent by Respondent to researchers"
+---
+
+[Suggest Edits](/edit/automated-emails)
+
+As projects are published and recruited through the Respondent API, you will receive transactional emails for the researcher sent to the email address for your API researcher account. This page outlines what emails are sent so that you can align with emails that you may want to send/trigger to your researcher customers, if desired.
+
+### Project Notifications
+
+| Email                      | Description                                                                                                                                             | Environment |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| Project Saved              | Notifies that project has been created                                                                                                                  | All         |
+| Publish Reminder           | Reminds a researcher to publish project if it has been in Draft status for >3 days                                                                      | All         |
+| Recruiting Started         | Notifies researcher that recruiting has launched for a project                                                                                          | All         |
+| 1st Qualified Participant  | Notifies that the first participant has been qualified for a project                                                                                    | All         |
+| Project Filled             | Notifies that the project has reached its target number for qualified participants                                                                      | All         |
+| New Message                | Notifies that a participant has sent a message about a particular project                                                                               | All         |
+| Booking Reminder           | Reminds researcher of upcoming scheduled session (for IDI or Focus Group), with participant info                                                        | All         |
+| Pay Participant Reminder   | Prompts researcher to pay participants that have been marked as attended *(uncommon because API will auto-pay participants who are marked as attended)* | All         |
+| Auto-Pause Warning         | Notifies researcher on 27th day that project will automatically pause on Day 28 (if it is not already paused because of hitting 3x recruiting target)   | All         |
+| Project Recruiting Stopped | Notifies researcher that project has stopped recruiting after 30 days, if project has not been paused                                                   | All         |
+
+### Participant Status Change Notifications
+
+| Email                 | Description                                                                                                     | Environment |
+| --------------------- | --------------------------------------------------------------------------------------------------------------- | ----------- |
+| Participant Scheduled | Notifies researcher that participant has scheduled (or rescheduled) a research session (for IDI or Focus Group) | All         |
+| Booking Cancelled     | Notifies that a scheduled research session (for IDI or Focus Group) has been cancelled by participant           | All         |
+
+### Account/Organization Management Notifications
+
+| Email             | Description                                                                    | Environment |
+| ----------------- | ------------------------------------------------------------------------------ | ----------- |
+| New Researcher    | Notifies that new researcher has been added to the organization                | Prod only   |
+| Join Request      | Notifies that a researcher has requested to join the organization              | Prod only   |
+| Researcher Invite | Notifies a new researcher that they have been invited to join the organization | Prod only   |
+| Reset Password    | Provides password reset link if requested for account                          | Prod only   |
+
+###
+
+***
+
+* [Table of Contents](#)
+
+* * [Project Notifications](#project-notifications)
+  * [Participant Status Change Notifications](#participant-status-change-notifications)
+  * [Account/Organization Management Notifications](#accountorganization-management-notifications)

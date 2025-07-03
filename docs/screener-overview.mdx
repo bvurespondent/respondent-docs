@@ -1,0 +1,72 @@
+---
+title: "Overview"
+description: "Finding just the right participant for that study"
+---
+
+[Suggest Edits](/edit/screener-overview)
+
+# So what's the fuss about screeners?
+
+Screener questions serve as a brief survey to narrow down participants that match targeting parameters in a project. It is best practice to use between 5 and 10 questions - at least 2 are required. [Learn more here](https://help.respondent.io/en/articles/5489272-the-perfect-number-of-screener-questions). We currently offer the following screener question types:
+
+* Radio
+* Checkbox
+* Single line text box
+* Multi line text box
+* Number box
+* Slider
+
+## Basic qualifying logic
+
+Single answer or multiple choice question types can have qualifying logic applied directly to each answer. For example:
+
+Do you own any pets?
+
+1. Yes (qualify)
+2. No (disqualify)
+
+What pets do you own?
+
+1. Cat (may select)
+2. Dog (must select)
+3. Fish (may select)
+4. Raccoon (disqualify)
+
+## Skip logic
+
+These question types can also have skip logic applied where each possible answer selection can lead the participant directly to a specific question. Continuing the above example
+
+(Question 1) Do you own any pets?
+
+1. Yes (qualify)
+2. No (disqualify)
+   1. If selected go to **end of screener**
+
+(Question 2) What pets do you own?
+
+1. Cat (may select)
+2. Dog (must select)
+   1. If **not select** go to **end of screener**
+3. Fish (may select)
+4. Raccoon (disqualify)
+   1. If **selected** go to **end of screener**
+
+(Question 3) Tell us about where you got your first pet.
+
+(End of screener)
+
+***
+
+What’s Next
+
+Try it out!
+
+* [Creating screener questions](/docs/screener-creation-json)
+* [Messaging overview](/docs/coming-soon)
+
+* [Table of Contents](#)
+
+* * [So what's the fuss about screeners?](#so-whats-the-fuss-about-screeners)
+
+    * [Basic qualifying logic](#basic-qualifying-logic)
+    * [Skip logic](#skip-logic)

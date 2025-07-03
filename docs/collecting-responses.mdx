@@ -1,0 +1,312 @@
+---
+title: "Collecting responses"
+description: "This will outline how to surface participants to your researchers"
+---
+
+[Suggest Edits](/edit/collecting-responses)
+
+# Response formatting
+
+When collecting screener responses there may be one or multiple responses but generally the content of each response has a predictable set of information returned
+
+## Basic Screener response
+
+GET: /v1/projects/\{projectId}/screener-responses
+
+The example below shows a `screener-questions` POST and subsequent `screener-responses` GET. The response itself has information relating to the answered questions themselves as well as the participant. Most of the participant information can be found via a second call using the profile ID.
+
+Note you will see an additional question in `screener-responses` with a `null` order and text: "End Of Survey"; this is an auto generated question to signal to participants when they have reached the end of a screener.
+
+When displaying the responses section of the screener-response it is recommended to share:
+
+* Time the participant took to complete the screener
+
+* `"totalTime":`
+
+* The incentive the participant took the screener at
+  * `"project.incentive":`
+
+* Time screener was completed
+  * `"createdAt":`
+
+* Question, response, and qualify status
+
+  * `"questionText":`
+  * `"text":`
+  * `"qualify":`
+
+<CodeGroup>
+  ```json screener-questions POST
+
+  "projectID": "PROJECT_ID"
+  {
+    "questionType": "radio",
+    "text": "What is your favorite coastline in the United States?",
+    "answers": [
+      {
+        "text": "East Coast",
+        "answerValue": 2
+      },
+      {
+        "text": "West Coast",
+        "answerValue": 1
+      },
+      {
+        "isOther": true,
+        "text": "Other",
+        "answerValue": 2
+      }
+    ],
+    "skipLogic": false,
+    "includeOtherOption": true,
+    "isRequired": true
+  },
+  {
+    "questionType": "checkbox",
+    "text": "What animals would you like to spend time with?",
+    "answers": [
+      {
+        "text": "Cat",
+        "answerValue": 1
+      },
+      {
+        "text": "Dog",
+        "answerValue": 1
+      },
+      {
+        "text": "Giraffe",
+        "answerValue": 1
+      },
+      {
+        "text": "Pineapple",
+        "answerValue": 3
+      }
+    ],
+    "isRequired": true,
+    "skipLogic": false,
+    "includeOtherOption": false
+  },
+  {
+    "questionType": "multiLineTextbox",
+    "text": "In your own words, tell us what your favorite hoby is.",
+    "skipLogic": false,
+    "isRequired": true
+  },
+  {
+    "questionType": "singleLineTextbox",
+    "text": "What is your favorite color?",
+    "skipLogic": false,
+    "isRequired": true
+  },
+  {
+    "questionType": "numericBox",
+    "text": "How old are you?",
+    "skipLogic": false,
+    "isRequired": true
+  },
+  {
+    "questionType": "sliderScale",
+    "text": "On a scale from 1 to 10 how confident are you building an API?",
+    "isRequired": true,
+    "skipLogic": false,
+    "minValue": 1,
+    "maxValue": 10,
+    "step": 1
+  }
+  ```
+
+  ```json screener-responses GET
+  {
+              "id": "RESPONSE_ID",
+              "projectId": "PROJECT_ID",
+              "qualified": true,
+              "status": "PENDING",
+              "favorite": false,
+              "hidden": false,
+              "responses": [
+                  {
+                      "questionId": "6526e85f08fa017ec030ec93",
+                      "questionText": "What is your favorite coastline in the United States?",
+                      "order": 0,
+                      "type": "screener",
+                      "questionType": "radio",
+                      "answers": {
+                          "id": "6526e85f08fa017ec030ec94",
+                          "uid": "b80c8be4-5abc-45c0-a92b-24552095ac9d",
+                          "text": "West Coast",
+                          "answerValue": 1,
+                          "goToQuestionUid": null
+                      },
+                      "qualify": true
+                  },
+                  {
+                      "questionId": "6526e85f08fa017ec030ec96",
+                      "questionText": "What animals would you like to spend time with?",
+                      "order": 1,
+                      "type": "screener",
+                      "questionType": "checkbox",
+                      "qualify": true,
+                      "answers": [
+                          {
+                              "id": "6526e85f08fa017ec030ec98",
+                              "uid": "c84ba5eb-a487-43b0-8196-aa5f538f4bc9",
+                              "text": "Pineapple",
+                              "answerValue": 3,
+                              "goToQuestionUid": null,
+                              "checked": true
+                          }
+                      ]
+                  },
+                  {
+                      "questionId": "6526e85f08fa017ec030ec9a",
+                      "questionText": "In your own words, tell us what your favorite hoby is.",
+                      "order": 2,
+                      "type": "screener",
+                      "questionType": "multiLineTextbox",
+                      "answers": "My favorite hoby is riding motorcycles.",
+                      "qualify": true
+                  },
+                  {
+                      "questionId": "6526e85f08fa017ec030ec9b",
+                      "questionText": "What is your favorite color?",
+                      "order": 3,
+                      "type": "screener",
+                      "questionType": "singleLineTextbox",
+                      "answers": "Green",
+                      "qualify": true
+                  },
+                  {
+                      "questionId": "6526e85f08fa017ec030ec9c",
+                      "questionText": "How old are you?",
+                      "order": 4,
+                      "type": "screener",
+                      "questionType": "numericBox",
+                      "answers": "36",
+                      "qualify": true
+                  },
+                  {
+                      "questionId": "6526e85f08fa017ec030ec9d",
+                      "questionText": "On a scale from 1 to 10 how confident are you building an API?",
+                      "order": 5,
+                      "type": "screener",
+                      "questionType": "sliderScale",
+                      "answers": 9,
+                      "qualify": true
+                  },
+                {
+                      "questionId": "6526e85f08fa017ec030ec9e",
+                      "questionText": "End Of Survey",
+                      "order": null,
+                      "type": "screener",
+                      "questionType": "sliderScale",
+                      "answers": null,
+                      "qualify": true
+                  }
+              ],
+              "totalTime": 33,
+              "isNew": false,
+              "visibility": {
+                  "name": "VISIBLE",
+                  "status": "VISIBLE",
+                  "code": "OK"
+              },
+              "statusUpdatedAt": null,
+              "project": {
+                  "id": "PROJECT_ID",
+                  "name": "Test Screener Answer Values",
+                  "incentive": 125,
+                  "organizationId": "ORG_ID",
+                  "teamId": "TEAM_ID"
+              },
+              "profile": {
+                  "id": "PROFILE_ID",
+                  "firstName": "Bob",
+                  "lastName": "H",
+                  "skills": [
+                      {
+                          "createdAt": "2023-10-11T18:27:24.260Z",
+                          "validated": true,
+                          "type": "certification",
+                          "count": 0,
+                          "slug": "typescript",
+                          "id": "SKILL_ID",
+                          "name": "TypeScript"
+                      }
+                  ]
+              }
+          }
+  ```
+</CodeGroup>
+
+## Viewing the profile
+
+/v1/profiles/\{profileId}
+
+<CodeGroup>
+  ```json json
+  {
+    "userId": "string",
+    "companySize": "selfemployed",
+    "gender": "male",
+    "educationLevel": "somehighschool",
+    "ethnicity": "americanindianalaskannative",
+    "householdIncome": "<30000",
+    "firstName": "Bob",
+    "lastInitial": "H",
+    "jobTitle": "PM",
+    "jobFunctions": [
+          "informationTechnology"
+    ],
+    "linkedinUrl": "URL",
+    "skills": [
+      {
+      
+          "createdAt": "2023-10-11T18:27:24.260Z",
+          "validated": true,
+          "type": "certification",
+          "count": 0,
+          "slug": "typescript",
+          "id": "SKILL_ID",
+          "name": "TypeScript"
+      }
+    ],
+    "isEmailVerified": true,
+    "location": {
+    "country": "US",
+          "location": {
+            "longitude": 42.22788,
+            "latitude": -71.191113
+          },
+          "city": "Boston",
+          "state": "MA",
+    },
+    "age": "string",
+    "socialLinks": {},
+    "industry": [
+      "string"
+    ],
+    "seniorityLevel": "senior",
+    "id": "string",
+    "createdAt": "2023-10-11T18:27:24.260Z",
+    "updatedAt": "2023-10-15T13:24:35.260Z"
+  }
+  ```
+</CodeGroup>
+
+## Understanding qualified responses
+
+`"qualified": true,` implies:
+
+* NDA is agree to if present
+* 100% percentage on screener questions
+* Matched on location, age, gender, education, and ethnicity
+
+***
+
+* [Table of Contents](#)
+
+* * [Response formatting](#response-formatting)
+
+    * [Basic Screener response](#basic-screener-response)
+    * [Viewing the profile](#viewing-the-profile)
+    * [Understanding qualified responses](#understanding-qualified-responses)

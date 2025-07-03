@@ -1,0 +1,460 @@
+---
+title: "Project deep dive"
+description: "Creating more complex projects"
+---
+
+[Suggest Edits](/edit/project-deep-dive)
+
+# B2B vs B2C
+
+POST: /v1/projects
+
+<CodeGroup>
+  ```json B2B
+  {
+    "publicTitle": "Seeking business professionals!",
+    "publicInternalName": "B2B Project Example",
+    "publicDescription": "We're looking for skilled business professions in a particular industry.",
+    "typeOfResearch": "remote",
+    "targetResearchMethodology": "oneOnOne",
+    "participantTimeRequiredMinutes": 30,
+    "incentiveAmount": 80,
+    "targetNumberOfParticipants": 5,
+    "targetMarketType": "b2b",
+    "targetProfessionalIndustries": [
+      "INDUSTRY_ID_1",
+      "INDUSTRY_ID_2"
+    ],
+    "targetJobTitles": [
+      "JOB_TITLE_ID_1",
+      "JOB_TITLE_ID_1"
+    ],
+    "targetJobFunctions": [
+      "JOB_FUNCTION_STRING_1",
+      "JOB_FUNCTION_STRING_2"
+    ],
+    "targetAudienceSkills": [
+      "SKILL_ID_1",
+      "SKILL_ID_2",
+      "SKILL_ID_3"
+    ],
+     "targetCountry": "all",
+     "externalResearcher": {
+      "researcherId": "PARTNER_SUPPLIED_ID",
+      "researcherName": "Jane Doe",
+      "bookingUrl": "https://bookingurl.com"
+    }
+  }
+  ```
+
+  ```json B2C
+  {
+    "publicTitle": "Seeking savvy consumers!",
+    "publicInternalName": "B2C Project Example",
+    "publicDescription": "We're seeking people who one this product and want to share their opinions.",
+    "typeOfResearch": "remote",
+    "targetResearchMethodology": "oneOnOne",
+    "participantTimeRequiredMinutes": 30,
+    "incentiveAmount": 60,
+    "targetNumberOfParticipants": 5,
+    "targetMarketType": "b2c",
+    "targetProjectTopics": [
+      "TOPIC_ID_1",
+      "TOPIC_ID_2"
+    ],
+     "targetCountry": "all",
+     "externalResearcher": {
+      "researcherId": "PARTNER_SUPPLIED_ID",
+      "researcherName": "Jane Doe",
+      "bookingUrl": "https://bookingurl.com"
+    }
+  }
+  ```
+</CodeGroup>
+
+## Required fields for B2B vs B2C projects
+
+Please see [Targeting audiences effectively](/docs/targeting-audiences-effectively) for a full list of optional and required fields for B2B and B2C projects.
+
+# Remote vs in person
+
+POST: /v1/projects
+
+<CodeGroup>
+  ```json Remote
+  {
+    "publicTitle": "Seeking savvy consumers!",
+    "publicInternalName": "B2C Project Example",
+    "publicDescription": "We're seeking people who one this product and want to share their opinions.",
+    "typeOfResearch": "remote",
+    "targetResearchMethodology": "oneOnOne",
+    "participantTimeRequiredMinutes": 30,
+    "incentiveAmount": 60,
+    "targetNumberOfParticipants": 5,
+    "targetMarketType": "b2c",
+    "targetProjectTopics": [
+      "TOPIC_ID_1",
+      "TOPIC_ID_2"
+    ],
+     "targetCountry": "US",
+     "targetCities": [
+      {
+        "location": {
+          "country": "US",
+          "location": {
+            "longitude": 42.22788,
+            "latitude": -71.191113
+          },
+          "city": "Boston",
+          "state": "MA",
+          "googleId": "ChIJGzE9DS1l44kRoOhiASS_fHg"
+        }
+      }
+    ],
+     "externalResearcher": {
+      "researcherId": "PARTNER_SUPPLIED_ID",
+      "researcherName": "Jane Doe",
+      "bookingUrl": "https://bookingurl.com"
+    }
+  }
+  ```
+
+  ```json In Person
+  {
+    "publicTitle": "Seeking savvy consumers!",
+    "publicInternalName": "B2C Project Example",
+    "publicDescription": "We're seeking people who one this product and want to share their opinions.",
+    "typeOfResearch": "inperson",
+    "targetResearchMethodology": "oneOnOne",
+    "participantTimeRequiredMinutes": 30,
+    "incentiveAmount": 60,
+    "targetNumberOfParticipants": 5,
+    "targetMarketType": "b2c",
+    "targetProjectTopics": [
+      "TOPIC_ID_1",
+      "TOPIC_ID_2"
+    ],
+     "targetCountry": "US",
+      "targetLocationRespondentInPerson": {
+      "country": "US",
+      "address1": "700 Atlantic Avenue",
+      "city": "Boston",
+      "latitude": 42.351005,
+      "longitude": -71.05662,
+      "state": "MA",
+      "formattedAddress": "700 Atlantic Avenue, Boston, Ma 02205, USA"
+    },
+     "externalResearcher": {
+      "researcherId": "PARTNER_SUPPLIED_ID",
+      "researcherName": "Jane Doe",
+      "bookingUrl": "https://bookingurl.com"
+    }
+  }
+  ```
+</CodeGroup>
+
+## Remote
+
+When `remote` is selected for `typeOfResearch` a project will recruit participants world wide by default. `targetCountries` can be added to optionally target one or more countries
+
+* If a country is targeted, one or more cities can also be targeted in that country via `targetCities`.
+* Participants will be recruited within 250km (155 miles) for remote projects selecting a city.
+
+We recommend using [Google Place Autocomplete](https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete) to supply the required information for city targeting. We expect the a post including city targeting to include something similar to the code block below. It is important to note that cities cannot be added targeting worldwide, and only cities in targeted countries can be added.
+
+<CodeGroup>
+  ```Text targetCities
+  targetCities: [
+        {
+          location: {
+            city: 'Seattle',
+            state: 'WA',
+            country: 'US',
+            location: {
+              longitude: -122.3328481,
+              latitude: 47.6061389,
+            },
+          },
+        },
+        {
+          location: {
+            city: 'Portland',
+            state: 'OR',
+            country: 'US',
+            location: {
+              longitude: -122.6783853,
+              latitude: 45.515232,
+            },
+          },
+        },
+      ],
+  ```
+</CodeGroup>
+
+#### Methodologies
+
+When running remote projects the following `targetResearchMethodology` are valid.
+
+* One on One
+* Focus Group
+* Unmoderated Study
+* Survey
+* Diary Study
+
+## In person
+
+When `inperson` is selected for `typeOfResearch` a project must supply `targetCountry` and `targetLocationRespondentInPerson` fields.
+
+* Participants will be recruited within 100km (62 miles) for in person projects.
+
+We recommend using [Google Place Autocomplete](https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete) to supply the required information for city targeting.
+
+#### Methodologies
+
+When running in person projects the following `targetResearchMethodology` are valid.
+
+* One on One
+* Focus Group
+* In Respondent Home
+* In Respondent Office
+
+# Moderated vs unmoderated methodologies
+
+POST: /v1/projects
+
+<CodeGroup>
+  ```json oneOnOne
+  {
+    "publicTitle": "Seeking savvy consumers!",
+    "publicInternalName": "B2C Project Example",
+    "publicDescription": "We're seeking people who one this product and want to share their opinions.",
+    "typeOfResearch": "remote",
+    "targetResearchMethodology": "oneOnOne",
+    "participantTimeRequiredMinutes": 30,
+    "incentiveAmount": 60,
+    "targetNumberOfParticipants": 5,
+    "targetMarketType": "b2c",
+    "targetProjectTopics": [
+      "TOPIC_ID_1",
+      "TOPIC_ID_2"
+    ],
+     "targetCountry": "US",
+     "externalResearcher": {
+      "researcherId": "PARTNER_SUPPLIED_ID",
+      "researcherName": "Jane Doe",
+      "bookingUrl": "https://bookingurl.com"
+    }
+  }
+  ```
+
+  ```json focusGroup
+  {
+    "publicTitle": "Seeking savvy consumers!",
+    "publicInternalName": "B2C Project Example",
+    "publicDescription": "We're seeking people who one this product and want to share their opinions.",
+    "typeOfResearch": "remote",
+    "targetResearchMethodology": "focusGroup",
+    "participantTimeRequiredMinutes": 30,
+    "incentiveAmount": 60,
+    "targetNumberOfParticipants": 5,
+    "targetMarketType": "b2c",
+    "targetProjectTopics": [
+      "TOPIC_ID_1",
+      "TOPIC_ID_2"
+    ],
+     "targetCountry": "US",
+     "externalResearcher": {
+      "researcherId": "PARTNER_SUPPLIED_ID",
+      "researcherName": "Jane Doe",
+      "bookingUrl": "https://bookingurl.com"
+    }
+  }
+  ```
+
+  ```json unmoderatedStudy
+  {
+    "publicTitle": "Seeking savvy consumers!",
+    "publicInternalName": "B2C Project Example",
+    "publicDescription": "We're seeking people who one this product and want to share their opinions.",
+    "typeOfResearch": "remote",
+    "targetResearchMethodology": "unmoderatedStudy",
+     "unmoderatedStudyOrSurvey": {
+      "remoteCommunicationDetails": "https://www.myunmoderatedstudylink.com",
+      "specialInstructions": "Please open the link to walk through the same UI and give your feedback!"
+    },
+    "participantTimeRequiredMinutes": 20,
+    "incentiveAmount": 40,
+    "targetNumberOfParticipants": 10,
+    "targetMarketType": "b2c",
+    "targetProjectTopics": [
+      "TOPIC_ID_1",
+      "TOPIC_ID_2"
+    ],
+     "targetCountry": "US",
+     "externalResearcher": {
+      "researcherId": "PARTNER_SUPPLIED_ID",
+      "researcherName": "Jane Doe",
+    }
+  }
+  ```
+
+  ```json survey
+  {
+    "publicTitle": "Seeking savvy consumers!",
+    "publicInternalName": "B2C Project Example",
+    "publicDescription": "We're seeking people who one this product and want to share their opinions.",
+    "typeOfResearch": "remote",
+    "targetResearchMethodology": "survey",
+     "unmoderatedStudyOrSurvey": {
+      "remoteCommunicationDetails": "https://www.mysurveylink.com",
+      "specialInstructions": "Please fill out this survey!"
+    },
+    "participantTimeRequiredMinutes": 10,
+    "incentiveAmount": 20,
+    "targetNumberOfParticipants": 10,
+    "targetMarketType": "b2c",
+    "targetProjectTopics": [
+      "TOPIC_ID_1",
+      "TOPIC_ID_2"
+    ],
+     "targetCountry": "US",
+     "externalResearcher": {
+      "researcherId": "PARTNER_SUPPLIED_ID",
+      "researcherName": "Jane Doe",
+    }
+  }
+  ```
+
+  ```json diaryStudy
+  {
+    "publicTitle": "Seeking savvy consumers!",
+    "publicInternalName": "B2C Project Example",
+    "publicDescription": "We're seeking people who one this product and want to share their opinions.",
+    "typeOfResearch": "remote",
+    "targetResearchMethodology": "diaryStudy",
+    "participantTimeRequiredMinutes": 30,
+    "incentiveAmount": 60,
+    "targetNumberOfParticipants": 5,
+    "targetMarketType": "b2c",
+    "targetProjectTopics": [
+      "TOPIC_ID_1",
+      "TOPIC_ID_2"
+    ],
+     "targetCountry": "US",
+     "externalResearcher": {
+      "researcherId": "PARTNER_SUPPLIED_ID",
+      "researcherName": "Jane Doe",
+      "bookingUrl": "https://bookingurl.com"
+    }
+  }
+  ```
+
+  ```json inRespondentHome
+  {
+    "publicTitle": "Seeking savvy consumers!",
+    "publicInternalName": "B2C Project Example",
+    "publicDescription": "We're seeking people who one this product and want to share their opinions.",
+    "typeOfResearch": "remote",
+    "targetResearchMethodology": "inRespondentHome",
+    "participantTimeRequiredMinutes": 30,
+    "incentiveAmount": 60,
+    "targetNumberOfParticipants": 5,
+    "targetMarketType": "b2c",
+    "targetProjectTopics": [
+      "TOPIC_ID_1",
+      "TOPIC_ID_2"
+    ],
+     "targetCountry": "US",
+     "targetLocationRespondentInPerson": {
+      "country": "US",
+      "address1": "700 Atlantic Avenue",
+      "city": "Boston",
+      "latitude": 42.351005,
+      "longitude": -71.05662,
+      "state": "MA",
+      "formattedAddress": "700 Atlantic Avenue, Boston, Ma 02205, USA"
+    },
+     "externalResearcher": {
+      "researcherId": "PARTNER_SUPPLIED_ID",
+      "researcherName": "Jane Doe",
+      "bookingUrl": "https://bookingurl.com"
+    }
+  }
+  ```
+
+  ```json inRespondentOffice
+  {
+    "publicTitle": "Seeking savvy consumers!",
+    "publicInternalName": "B2C Project Example",
+    "publicDescription": "We're seeking people who one this product and want to share their opinions.",
+    "typeOfResearch": "remote",
+    "targetResearchMethodology": "inRespondentOffice",
+    "participantTimeRequiredMinutes": 30,
+    "incentiveAmount": 60,
+    "targetNumberOfParticipants": 5,
+    "targetMarketType": "b2c",
+    "targetProjectTopics": [
+      "TOPIC_ID_1",
+      "TOPIC_ID_2"
+    ],
+     "targetCountry": "US",
+     "targetLocationRespondentInPerson": {
+      "country": "US",
+      "address1": "700 Atlantic Avenue",
+      "city": "Boston",
+      "latitude": 42.351005,
+      "longitude": -71.05662,
+      "state": "MA",
+      "formattedAddress": "700 Atlantic Avenue, Boston, Ma 02205, USA"
+    },
+     "externalResearcher": {
+      "researcherId": "PARTNER_SUPPLIED_ID",
+      "researcherName": "Jane Doe",
+      "bookingUrl": "https://bookingurl.com"
+    }
+  }
+  ```
+</CodeGroup>
+
+## Moderated
+
+Methodologies that are considered moderated must use the `bookingUrl` field in the `externalResearcher` object to pass back a URL where the participant can book a meeting time with the researcher.
+
+* oneOnOne
+* focusGroup
+* inRespondentHome
+* inRespondentOffice
+* diaryStudy
+
+## Unmoderated
+
+Methodologies that are considered unmoderated must use a `unmoderatedStudyOrSurvey` object to pass through a URL (`remoteCommunicationDetails`) and instructions (`specialInstructions`) for participants.
+
+* survey
+* unmoderatedStudy
+
+### remoteCommunicationDetails
+
+URLs that are places in this field will be appended with URL parameters on redirect to allow partners to collect participant, project, and screener response information. These fields can help confirm which participant relates to a particular survey response. Please see the [URL Parameters guide](/docs/url-parameters-for-project-link) for more information.
+
+***
+
+What’s Next
+
+* [/v1/projects](/reference/projectscontroller_create)
+* [Screener overview](/docs/screener-overview)
+
+* [Table of Contents](#)
+
+* * [B2B vs B2C](#b2b-vs-b2c)
+    * [Required fields for B2B vs B2C projects](#required-fields-for-b2b-vs-b2c-projects)
+
+  * [Remote vs in person](#remote-vs-in-person)
+
+    * [Remote](#remote)
+    * [In person](#in-person)
+
+  * [Moderated vs unmoderated methodologies](#moderated-vs-unmoderated-methodologies)
+
+    * [Moderated](#moderated)
+    * [Unmoderated](#unmoderated)

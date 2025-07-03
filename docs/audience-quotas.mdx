@@ -1,0 +1,156 @@
+---
+title: "Audience Quotas"
+description: "Suggest Edits"
+---
+
+<Warning />
+
+Use quota endpoints to limit how many participants come from each audience segment. This is helpful if you want a balanced, representative sample - but totally optional.
+
+Quotas are currently only available for unmoderated studies and surveys that have auto-invite enabled.
+
+We currently support only one quota per project, based on demographic categories.
+
+## Quota Categories (v1)
+
+The following demographic fields are supported in v1:
+
+| Field                                      | Examples                                                                  |
+| ------------------------------------------ | ------------------------------------------------------------------------- |
+| gender                                     | `female`, `male`, `other`                                                 |
+| age                                        | `18-20`, `21-29`, `30-39`                                                 |
+| ethnicity                                  | `americanindianalaskannative`, `hispaniclatino`, `blackorafricanamerican` |
+| location (Country Code ISO 3166-1 alpha-2) | `US`, `GB`, `BR`                                                          |
+
+## Eligibility Constraints
+
+* Project `targetResearchMethodology` must be `unmoderatedStudy` or `survey`
+* Auto-invite must be enabled
+* Quotas must be defined before project is published and can't be edited once the project has been published
+
+## Sample Workflow
+
+1. Create an unmoderated/survey project with auto-invite enabled via [POST /v1/projects](/reference/projectscontroller_create).
+2. Define quotas with POST /v1/projects/\{projectId}/quota.
+3. Publish project - we will match and invite participants based on your desired quota segments.
+4. Monitor fill progress with GET /v1/projects/\{projectId}/quota
+
+## Creating quotas
+
+POST /v1/projects/\{projectId}/quota
+
+<CodeGroup>
+  ```Text Example request
+  {
+    "version": "v1",
+    "criteria": {
+      "category": "gender",
+      "segments": [
+        {
+          "value": "male",
+          "percentage": 50
+        },
+        {
+          "value": "female",
+          "percentage": 50
+        }
+      ]
+    }
+  }
+  ```
+
+  ```Text Example response
+  {
+    "id": "68086546545de68c1bc1bc1b",
+    "projectId": "68084868666de68c1b4f3412",
+    "version": "v1",
+    "totalTarget": 1,
+    "status": "IN_PROGRESS",
+    "criteria": {
+      "category": "gender",
+      "segments": [
+        {
+          "value": "male",
+          "percentage": 50,
+          "id": "1"
+        },
+        {
+          "value": "female",
+          "percentage": 50,
+          "id": "2"
+        }
+      ]
+    },
+    "progress": {
+      "currentCount": 0,
+      "targetCount": 50
+    },
+    "createdAt": "2025-05-15T03:44:44.482Z",
+    "updatedAt": "2025-05-15T03:44:44.482Z"
+  }
+  ```
+</CodeGroup>
+
+## Monitoring quota fill rates
+
+GET /v1/projects/\{projectId}/quota
+
+<CodeGroup>
+  ```Text Example response
+  {
+    "id": "68086546545de68c1bc1bc1b",
+    "projectId": "68084868666de68c1b4f3412",
+    "version": "v1",
+    "totalTarget": 10,
+    "status": "IN_PROGRESS",
+    "criteria": {
+      "category": "gender",
+      "segments": [
+        {
+          "value": "male",
+          "percentage": 50,
+          "id": "1"
+        },
+        {
+          "value": "female",
+          "percentage": 50,
+          "id": "2"
+        }
+      ]
+    },
+    "progress": {
+      "1": {
+        "currentCount": 2,
+        "targetCount": 5
+      },
+      "2": {
+        "currentCount": 1,
+        "targetCount": 5
+      }
+    },
+    "createdAt": "2025-05-15T03:44:44.482Z",
+    "updatedAt": "2025-05-15T03:44:44.482Z"
+  }
+  ```
+</CodeGroup>
+
+## References
+
+Example of how quotas are created via the Respondent Researcher Platform
+
+![](/images/docs/720ea83d19c3dae103939e0419798abd70cbaa8408030d94a4cf8b695323f513-quotas_example.png)
+
+Example of how fill progress is presented in the Respondent Researcher Platform
+
+![](/images/docs/78e363bbb9eeefac846642b70f3d15c3a7e583793a9b1f073a98ad94f3f82b80-quotas_report_example.png)
+
+***
+
+* [Table of Contents](#)
+
+* * [Quota Categories (v1)](#quota-categories-v1)
+  * [Eligibility Constraints](#eligibility-constraints)
+  * [Sample Workflow](#sample-workflow)
+  * [Creating quotas](#creating-quotas)
+  * [Monitoring quota fill rates](#monitoring-quota-fill-rates)
+  * [References](#references)
