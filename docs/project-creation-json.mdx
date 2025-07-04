@@ -1,6 +1,6 @@
 ---
 title: "Create a project"
-description: "Putting project requirements to use"
+description: "Putting project requirements to use swag swag swag"
 ---
 
 [Suggest Edits](/edit/project-creation-json)
@@ -57,79 +57,80 @@ POST: /v1/projects
 B2B and B2C projects differ in requirements and have different configurations. See Conditionals page linked below.
 
 <CodeGroup>
-  ```json B2B Project
-  {
-    "publicTitle": "Seeking business professionals!",
-    "publicInternalName": "B2B Project Example",
-    "publicDescription": "We're looking for skilled business professions in a particular industry.",
-    "typeOfResearch": "remote",
-    "targetResearchMethodology": "oneOnOne",
-    "participantTimeRequiredMinutes": 30,
-    "incentiveAmount": 80,
-    "targetNumberOfParticipants": 5,
-    "targetMarketType": "b2b",
-    "targetProfessionalIndustries": [
-      "INDUSTRY_ID_1",
-      "INDUSTRY_ID_2"
-    ],
-    "targetJobTitles": [
-      "JOB_TITLE_ID_1",
-      "JOB_TITLE_ID_1"
-    ],
-    "targetAudienceSkills": [
-      "SKILL_ID_1",
-      "SKILL_ID_2",
-      "SKILL_ID_3"
-    ],
-     "targetCountry": "all",
-     "externalResearcher": {
-      "researcherId": "PARTNER_SUPPLIED_ID",
-      "researcherName": "Jane Doe",
-      "bookingUrl": "https://bookingurl.com"
-    }
-  }
-  ```
 
-  ```json B2C Project
-  {
-    "publicTitle": "Seeking savvy consumers!",
-    "publicInternalName": "B2C Project Example",
-    "publicDescription": "We're seeking people who one this product and want to share their opinions.",
-    "typeOfResearch": "remote",
-    "targetResearchMethodology": "oneOnOne",
-    "participantTimeRequiredMinutes": 30,
-    "incentiveAmount": 60,
-    "targetNumberOfParticipants": 5,
-    "targetMarketType": "b2c",
-    "targetProjectTopics": [
-      "TOPIC_ID_1",
-      "TOPIC_ID_2"
-    ],
-     "targetCountry": "all",
-     "externalResearcher": {
-      "researcherId": "PARTNER_SUPPLIED_ID",
-      "researcherName": "Jane Doe",
-      "bookingUrl": "https://bookingurl.com"
-    }
+```json B2B Project
+{
+  "publicTitle": "Seeking business professionals!",
+  "publicInternalName": "B2B Project Example",
+  "publicDescription": "We're looking for skilled business professions in a particular industry.",
+  "typeOfResearch": "remote",
+  "targetResearchMethodology": "oneOnOne",
+  "participantTimeRequiredMinutes": 30,
+  "incentiveAmount": 80,
+  "targetNumberOfParticipants": 5,
+  "targetMarketType": "b2b",
+  "targetProfessionalIndustries": [
+    "INDUSTRY_ID_1",
+    "INDUSTRY_ID_2"
+  ],
+  "targetJobTitles": [
+    "JOB_TITLE_ID_1",
+    "JOB_TITLE_ID_1"
+  ],
+  "targetAudienceSkills": [
+    "SKILL_ID_1",
+    "SKILL_ID_2",
+    "SKILL_ID_3"
+  ],
+   "targetCountry": "all",
+   "externalResearcher": {
+    "researcherId": "PARTNER_SUPPLIED_ID",
+    "researcherName": "Jane Doe",
+    "bookingUrl": "https://bookingurl.com"
   }
-  ```
+}
+```
+
+
+```json B2C Project
+{
+  "publicTitle": "Seeking savvy consumers!",
+  "publicInternalName": "B2C Project Example",
+  "publicDescription": "We're seeking people who one this product and want to share their opinions.",
+  "typeOfResearch": "remote",
+  "targetResearchMethodology": "oneOnOne",
+  "participantTimeRequiredMinutes": 30,
+  "incentiveAmount": 60,
+  "targetNumberOfParticipants": 5,
+  "targetMarketType": "b2c",
+  "targetProjectTopics": [
+    "TOPIC_ID_1",
+    "TOPIC_ID_2"
+  ],
+   "targetCountry": "all",
+   "externalResearcher": {
+    "researcherId": "PARTNER_SUPPLIED_ID",
+    "researcherName": "Jane Doe",
+    "bookingUrl": "https://bookingurl.com"
+  }
+}
+```
+
 </CodeGroup>
 
 Once you are able to create projects successfully you should be able to view the projects by logging into Respondent’s [staging](https://website.staging.respondent.io/login) dashboard with your credentials:
 
 ![](/images/docs/a3c8e39-Screenshot_2023-09-19_at_8.06.02_PM.png)
 
-***
+---
 
 What’s Next
 
-* [Project deep dive](/docs/project-deep-dive)
-* [Conditionals](/docs/conditional-and-dependency-reference)
-* [Screener overview](/docs/screener-overview)
-* [/v1/projects](/reference/projectscontroller_create)
-
-* [Table of Contents](#)
-
-* * [Defining a Project](#defining-a-project)
-  * [Targeting an Audience](#targeting-an-audience)
-  * [Project creation](#project-creation)
+- [Project deep dive](/docs/project-deep-dive)
+- [Conditionals](/docs/conditional-and-dependency-reference)
+- [Screener overview](/docs/screener-overview)
+- [/v1/projects](/reference/projectscontroller_create)
+- [Table of Contents](#)
+- - [Defining a Project](#defining-a-project)
+  - [Targeting an Audience](#targeting-an-audience)
+  - [Project creation](#project-creation)
