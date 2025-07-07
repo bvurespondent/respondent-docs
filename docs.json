@@ -1,16 +1,20 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
+  "theme": "maple",
   "name": "Create a project",
   "colors": {
-    "primary": "#0f72eb",
-    "light": "#0f72eb",
-    "dark": "#0f72eb"
+    "primary": "#fdfdf7",
+    "light": "#fdfdf7",
+    "dark": "#fdfdf7"
   },
-  "favicon": "/favicon.ico",
+  "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
       {
+        "tab": "Welcome"
+      },
+      {
+      
         "tab": "Guides",
         "groups": [
           {
@@ -56,9 +60,7 @@
           },
           {
             "group": "Webhooks",
-            "pages": [
-              "docs/webhooks"
-            ]
+            "pages": ["docs/webhooks"]
           },
           {
             "group": "Guides",
@@ -86,59 +88,88 @@
           {
             "group": "Project Setup",
             "pages": [
-              "reference/projectscontroller_create",
               {
                 "group": "Core Setup",
                 "pages": [
-                  "reference/projectscontroller_create"
+                  "projects/create-a-project",
+                  "screener-questions/create-a-screener-question",
+                  "screener-questions/create-multiple-screener-questions",
+                  "projects/publish-a-project"
                 ]
               },
               {
                 "group": "Extended Setup Actions",
                 "pages": [
-                  "reference/projectscontroller_projectaudiencesizeestimate"
+                  "projects/retrieve-audience-size-estimate",
+                  "projects/upload-nda-file",
+                  "projects/copy-a-project",
+                  "profiles/create-test-participant-staging-only"
                 ]
               },
               {
                 "group": "Project Management",
                 "pages": [
-                  "reference/projectscontroller_findall"
+                  "projects/retrieve-all-projects",
+                  "projects/retrieve-a-specific-project",
+                  "projects/update-a-project",
+                  "projects/pause-a-project",
+                  "projects/close-a-project",
+                  "projects/delete-a-project"
                 ]
               },
               {
                 "group": "Screener Question Management",
                 "pages": [
-                  "reference/screenerquestionscontroller_findall-1"
+                  "screener-questions/retrieve-screener-questions",
+                  "screener-questions/retrieve-specific-screener-question",
+                  "screener-questions/update-screener-question",
+                  "screener-questions/delete-screener-question",
+                  "screener-questions/reorder-screener-questions"
                 ]
               }
             ]
           },
+
           {
             "group": "Screener Response Handling",
+
             "pages": [
-              "reference/screenerresponsescontroller_findall-1",
+        
               {
                 "group": "View Responses & Profiles",
                 "pages": [
-                  "reference/screenerresponsescontroller_findall-1"
+                  "screener-responses/list-screener-responses",
+                  "screener-responses/view-a-specific-response",
+                  "profiles/retrieve-participant-profile"
                 ]
               },
               {
                 "group": "Invite & Schedule Participants",
-                "pages": [
-                  "reference/screenerresponsescontroller_qualify-1"
-                ]
+                "pages": [ 
+                  "screener-responses/qualify-participant",
+                  "screener-responses/invite-participant",
+                  "screener-responses/schedule-participant",
+                  "screener-responses/cancel-invite",
+                  "screener-responses/cancel-booking",
+                  "screener-responses/cancel-booking-&-re-invite",
+                  "screener-responses/cancel-booking-participant-request"]
               },
               {
                 "group": "Update Participant Status",
                 "pages": [
-                  "reference/screenerresponsescontroller_markatteneded-1"
+                  "screener-responses/mark-as-attended",
+                  "screener-responses/mark-as-rejected",
+                  "screener-responses/mark-as-no-show",
+                  "screener-responses/report-participant",
+                  "screener-responses/mark-as-favorite",
+                  "screener-responses/hide-participant"
                 ]
               },
               {
                 "group": "Payouts",
                 "pages": [
-                  "reference/screenerresponsescontroller_payoutparticipant"
+                  "screener-responses/trigger-manual-payout", 
+                  "screener-responses/retrieve-payout-counts"
                 ]
               }
             ]
@@ -146,35 +177,46 @@
           {
             "group": "Messaging",
             "pages": [
-              "reference/conversationscontroller_create",
+             
               {
                 "group": "Create Messages & Conversations",
                 "pages": [
-                  "reference/conversationscontroller_create"
-                ]
+                  "messaging/create-a-conversation",
+                  "messaging/create-a-message",
+                  "messaging/add-participant-to-conversation"]
               },
               {
                 "group": "View Messages & Conversations",
                 "pages": [
-                  "reference/messagescontroller_findall"
-                ]
+                  "messaging/retrieve-all-messages",
+                  "messaging/retrieve-unread-conversations",
+                  "messaging/retrieve-specific-message",
+                  "messaging/retrieve-all-conversations",
+                  "messaging/retrieve-specific-conversation"
+                  ]
               },
               {
                 "group": "Manage Conversations",
                 "pages": [
-                  "reference/conversationscontroller_markasread"
-                ]
+                   "messaging/mark-conversation-as-read",
+                  "messaging/remove-participant-from-conversation",
+                  "messaging/update-a-conversation"
+                 ]
               }
             ]
           },
           {
             "group": "Lookup and Reference Data",
             "pages": [
-              "reference/industriescontroller_findall-1",
+              
               {
                 "group": "Lookup Lists",
                 "pages": [
-                  "reference/industriescontroller_findall-1"
+                  "industries/retrieve-industry-list",
+                  "job-titles/retrieve-job-title-list",
+                  "skills/retrieve-skill-list",
+                  "topics/retrieve-topics-list",
+                  "lookups/retrieve-lookup-values"
                 ]
               }
             ]
@@ -182,11 +224,16 @@
           {
             "group": "Webhooks",
             "pages": [
-              "reference/webhookscontroller_create",
+             
               {
                 "group": "Webhook Configuration",
                 "pages": [
-                  "reference/webhookscontroller_create"
+                  "webhooks/create-webhook",
+                  "webhooks/retrieve-webhook",
+                  "webhooks/retrieve-specific-webhook",
+                  "webhooks/retrieve-webhook-event-types",
+                  "webhooks/simulate-webhook-event",
+                  "webhooks/deactivate-webhook"
                 ]
               }
             ]
@@ -194,11 +241,14 @@
           {
             "group": "Team Tools",
             "pages": [
-              "reference/teamrespondentscontroller_findall",
+            
               {
                 "group": "Team Features",
                 "pages": [
-                  "reference/teamrespondentscontroller_findall"
+                  "team-respondents/search-past-participants",
+                  "team-respondents/retrieve-past-participant-profile",
+                  "team-respondents/invite-multiple-past-participants",
+                  "pricing/view-credit-and-incentive-balance"
                 ]
               }
             ]
